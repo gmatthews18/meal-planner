@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(
-      'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1',
+      'https://api-inference.huggingface.co/models/gpt2',
       {
         method: 'POST',
         headers: {
@@ -31,7 +31,10 @@ export default async function handler(req, res) {
         },
         body: JSON.stringify({
           inputs: prompt,
-          parameters: { max_length: 500 }
+          parameters: {
+            max_length: 150,
+            num_return_sequences: 1
+          }
         }),
       }
     );
@@ -45,7 +48,17 @@ export default async function handler(req, res) {
     }
 
     const result = await response.json();
-    res.status(200).json(result);
+
+    // GPT-2 returns an array with generated_text
+    if (Array.isArray(result) && result[0]?.generated_text) {
+      res.status(200).json(result);
+    } else if (result.generated_text) {
+      res.status(200).json([result]);
+    } else if (result.error) {
+      res.status(400).json({ error: result.error });
+    } else {
+      res.status(200).json(result);
+    }
   } catch (error) {
     res.status(500).json({ error: `Server error: ${error.message}` });
   }
