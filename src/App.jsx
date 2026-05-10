@@ -9,8 +9,6 @@ function App() {
   const [dailyCalories, setDailyCalories] = useState({});
   const [showSettings, setShowSettings] = useState(false);
   const [editingCalories, setEditingCalories] = useState({});
-  const [apiKey, setApiKey] = useState(localStorage.getItem('hf_api_key') || '');
-  const [showApiInput, setShowApiInput] = useState(!apiKey);
   const [chatMessages, setChatMessages] = useState([]);
   const [chatInput, setChatInput] = useState('');
   const [loadingChat, setLoadingChat] = useState(false);
@@ -28,20 +26,6 @@ function App() {
       jude: savedCalories ? JSON.parse(savedCalories).jude || mealData.jude.dailyCalories : mealData.jude.dailyCalories
     });
   }, []);
-
-  const saveApiKey = () => {
-    if (apiKey.trim()) {
-      localStorage.setItem('hf_api_key', apiKey);
-      setShowApiInput(false);
-    }
-  };
-
-  const resetApiKey = () => {
-    localStorage.removeItem('hf_api_key');
-    setApiKey('');
-    setShowApiInput(true);
-    setChatMessages([]);
-  };
 
   const person = mealData[selectedPerson];
   const currentWeekData = person.weeks[currentWeek];
@@ -118,6 +102,51 @@ function App() {
     }
   }, [activeTab, currentWeek, selectedPerson, currentWeekData]);
 
+  const generateNutritionAdvice = () => {
+    const weeklyTotals = getWeeklyTotals();
+    const avgDailyCalories = weeklyTotals.calories / 7;
+    const avgDailyProtein = weeklyTotals.protein / 7;
+    const avgDailyCarbs = weeklyTotals.carbs / 7;
+    const avgDailyFat = weeklyTotals.fat / 7;
+    const calorieTarget = personDailyCalories;
+    const calorieRatio = avgDailyCalories / calorieTarget;
+
+    const responses = [];
+
+    // Calorie advice
+    if (calorieRatio < 0.9) {
+      responses.push(`Your meal plan averages ${Math.round(avgDailyCalories)} calories/day, which is about ${Math.round((1 - calorieRatio) * 100)}% below your ${calorieTarget} calorie target. Consider adding more protein-rich snacks or increasing portion sizes.`);
+    } else if (calorieRatio > 1.1) {
+      responses.push(`Your meal plan averages ${Math.round(avgDailyCalories)} calories/day, which is about ${Math.round((calorieRatio - 1) * 100)}% above your ${calorieTarget} calorie target. Try reducing portion sizes or swapping high-calorie items for lighter alternatives.`);
+    } else {
+      responses.push(`Great! Your meal plan averages ${Math.round(avgDailyCalories)} calories/day, which is right on target with your ${calorieTarget} calorie goal.`);
+    }
+
+    // Protein advice
+    const proteinTarget = calorieTarget * 0.3 / 4; // 30% of calories from protein
+    if (avgDailyProtein < proteinTarget * 0.9) {
+      responses.push(`Your protein intake (${Math.round(avgDailyProtein)}g/day) is a bit low. Consider adding more chicken, fish, eggs, or legumes to meet your ~${Math.round(proteinTarget)}g daily target.`);
+    } else if (avgDailyProtein > proteinTarget * 1.2) {
+      responses.push(`Excellent protein intake at ${Math.round(avgDailyProtein)}g/day! This will help with muscle recovery and satiety.`);
+    } else {
+      responses.push(`Your protein intake (${Math.round(avgDailyProtein)}g/day) is well-balanced for your calorie goals.`);
+    }
+
+    // Macro balance advice
+    const carbPercent = (avgDailyCarbs * 4) / avgDailyCalories * 100;
+    const fatPercent = (avgDailyFat * 9) / avgDailyCalories * 100;
+    if (carbPercent > 60) {
+      responses.push(`Your carb ratio is ${Math.round(carbPercent)}%, which is on the higher side. You might consider swapping some refined carbs for whole grains.`);
+    }
+
+    // Dietary restrictions check
+    if (person.restrictions.length > 0) {
+      responses.push(`Remember: Your meal plan accounts for your dietary restrictions: ${person.restrictions.join(', ')}.`);
+    }
+
+    return responses.join(' ');
+  };
+
   const sendChatMessage = async () => {
     if (!chatInput.trim()) return;
 
@@ -126,58 +155,38 @@ function App() {
     setChatInput('');
     setLoadingChat(true);
 
-    // Prepare context about the week
-    const weekSummary = currentWeekData.days.map(day => {
-      const meals = day.meals.map(m => `${m.meal}: ${getMealName(currentWeekData.days.indexOf(day), m.meal, m.name)} (${m.calories}cal)`).join(', ');
-      return `${day.day}: ${meals}`;
-    }).join('\n');
+    // Simulate processing delay
+    await new Promise(resolve => setTimeout(resolve, 500));
 
-    const weeklyTotals = getWeeklyTotals();
+    const userQuery = chatInput.toLowerCase();
+    let aiResponse = '';
 
-    if (!apiKey.trim()) {
-      setShowApiInput(true);
-      const errorMessage = { text: 'Please enter your Hugging Face API key first.', sender: 'ai' };
-      setChatMessages(prev => [...prev, errorMessage]);
-      setLoadingChat(false);
-      return;
-    }
-
-    try {
-      const prompt = `You are a helpful nutrition assistant. Here's ${person.name}'s meal plan for week ${currentWeek + 1}:\n\n${weekSummary}\n\nWeekly totals: ${weeklyTotals.calories} calories, ${weeklyTotals.protein}g protein, ${weeklyTotals.carbs}g carbs, ${weeklyTotals.fat}g fat.\nDaily target: ${personDailyCalories} calories.\nDietary restrictions: ${person.restrictions.length > 0 ? person.restrictions.join(', ') : 'None'}.\n\nUser question: ${chatInput}\n\nProvide a helpful, concise response about the meal plan.`;
-
-      // Call Vercel API endpoint
-      const apiUrl = process.env.NODE_ENV === 'production'
-        ? '/api/ai'
-        : 'http://localhost:3001/api/ai';
-
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          prompt,
-          apiKey
-        }),
-      });
-
-      const result = await response.json();
-
-      let aiText = 'I encountered an error processing your request. Please try again.';
-      if (result[0]?.generated_text) {
-        aiText = result[0].generated_text;
-      } else if (result.error) {
-        aiText = `Error: ${result.error}`;
+    if (userQuery.includes('calor') || userQuery.includes('energy')) {
+      const weeklyTotals = getWeeklyTotals();
+      const avgDaily = weeklyTotals.calories / 7;
+      aiResponse = `Your meal plan for this week averages ${Math.round(avgDaily)} calories per day against a target of ${personDailyCalories}. ${generateNutritionAdvice()}`;
+    } else if (userQuery.includes('protein')) {
+      const weeklyTotals = getWeeklyTotals();
+      const avgProtein = weeklyTotals.protein / 7;
+      aiResponse = `Your protein intake averages ${Math.round(avgProtein)}g per day. ${generateNutritionAdvice()}`;
+    } else if (userQuery.includes('macro') || userQuery.includes('balance')) {
+      aiResponse = generateNutritionAdvice();
+    } else if (userQuery.includes('restrict') || userQuery.includes('allerg')) {
+      if (person.restrictions.length > 0) {
+        aiResponse = `Your dietary restrictions are: ${person.restrictions.join(', ')}. Your meal plan is designed to accommodate these restrictions. ${generateNutritionAdvice()}`;
+      } else {
+        aiResponse = `You don't have any dietary restrictions set. ${generateNutritionAdvice()}`;
       }
-
-      const aiMessage = { text: aiText, sender: 'ai' };
-      setChatMessages(prev => [...prev, aiMessage]);
-    } catch (e) {
-      const errorMessage = { text: `Error: ${e.message}`, sender: 'ai' };
-      setChatMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setLoadingChat(false);
+    } else if (userQuery.includes('recommend') || userQuery.includes('suggest')) {
+      const weeklyTotals = getWeeklyTotals();
+      aiResponse = `Here are my recommendations: ${generateNutritionAdvice()} Try mixing up your meals to keep things interesting while staying within your nutritional targets!`;
+    } else {
+      aiResponse = `Here's your nutrition analysis: ${generateNutritionAdvice()} Feel free to ask me about calories, protein, macros, or your dietary restrictions!`;
     }
+
+    const aiMessage = { text: aiResponse, sender: 'ai' };
+    setChatMessages(prev => [...prev, aiMessage]);
+    setLoadingChat(false);
   };
 
   const progressPercent = ((currentWeek + 1) / 6) * 100;
@@ -208,36 +217,9 @@ function App() {
               />
               <small>Current: {personDailyCalories} calories/day</small>
             </div>
-            <div className="settings-group">
-              <label>Hugging Face API Key</label>
-              <div style={{display: 'flex', gap: '8px', marginTop: '8px'}}>
-                <button onClick={() => setShowApiInput(true)} className="btn-secondary">Update API Key</button>
-                {apiKey && <button onClick={resetApiKey} className="btn-danger">Reset API Key</button>}
-              </div>
-            </div>
             <div className="button-group">
               <button onClick={saveCalories} className="btn-primary">Save Settings</button>
               <button onClick={() => setShowSettings(false)} className="btn-secondary">Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {showApiInput && (
-        <div className="modal-overlay" onClick={() => setShowApiInput(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h2>🔑 Hugging Face API Key</h2>
-            <p>Get your API key from <a href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener noreferrer">Hugging Face Settings</a></p>
-            <input
-              type="password"
-              placeholder="hf_..."
-              value={apiKey}
-              onChange={e => setApiKey(e.target.value)}
-              style={{width: '100%', padding: '8px', marginTop: '16px', marginBottom: '16px', borderRadius: '4px', border: '1px solid #ccc'}}
-            />
-            <div className="button-group">
-              <button onClick={saveApiKey} className="btn-primary">Save API Key</button>
-              <button onClick={() => setShowApiInput(false)} className="btn-secondary">Cancel</button>
             </div>
           </div>
         </div>
