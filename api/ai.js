@@ -36,9 +36,17 @@ export default async function handler(req, res) {
       }
     );
 
+    if (!response.ok) {
+      const errorText = await response.text();
+      return res.status(response.status).json({
+        error: `Hugging Face API error: ${response.statusText}`,
+        details: errorText
+      });
+    }
+
     const result = await response.json();
     res.status(200).json(result);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: `Server error: ${error.message}` });
   }
 }
