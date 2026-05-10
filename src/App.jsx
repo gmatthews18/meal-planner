@@ -107,7 +107,6 @@ function App() {
     const avgDailyCalories = weeklyTotals.calories / 7;
     const avgDailyProtein = weeklyTotals.protein / 7;
     const avgDailyCarbs = weeklyTotals.carbs / 7;
-    const avgDailyFat = weeklyTotals.fat / 7;
     const calorieTarget = personDailyCalories;
     const calorieRatio = avgDailyCalories / calorieTarget;
 
