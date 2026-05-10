@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import mealData from './mealData.json';
 import './App.css';
 
-// Embedded API key for Hugging Face
-const HF_API_KEY = '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';
-
 function App() {
   const [selectedPerson, setSelectedPerson] = useState('george');
   const [currentWeek, setCurrentWeek] = useState(0);
@@ -12,6 +9,8 @@ function App() {
   const [dailyCalories, setDailyCalories] = useState({});
   const [showSettings, setShowSettings] = useState(false);
   const [editingCalories, setEditingCalories] = useState({});
+  const [apiKey, setApiKey] = useState(localStorage.getItem('hf_api_key') || '');
+  const [showApiInput, setShowApiInput] = useState(!apiKey);
   const [chatMessages, setChatMessages] = useState([]);
   const [chatInput, setChatInput] = useState('');
   const [loadingChat, setLoadingChat] = useState(false);
@@ -30,6 +29,19 @@ function App() {
     });
   }, []);
 
+  const saveApiKey = () => {
+    if (apiKey.trim()) {
+      localStorage.setItem('hf_api_key', apiKey);
+      setShowApiInput(false);
+    }
+  };
+
+  const resetApiKey = () => {
+    localStorage.removeItem('hf_api_key');
+    setApiKey('');
+    setShowApiInput(true);
+    setChatMessages([]);
+  };
 
   const person = mealData[selectedPerson];
   const currentWeekData = person.weeks[currentWeek];
@@ -122,6 +134,14 @@ function App() {
 
     const weeklyTotals = getWeeklyTotals();
 
+    if (!apiKey.trim()) {
+      setShowApiInput(true);
+      const errorMessage = { text: 'Please enter your Hugging Face API key first.', sender: 'ai' };
+      setChatMessages(prev => [...prev, errorMessage]);
+      setLoadingChat(false);
+      return;
+    }
+
     try {
       // Call Hugging Face API directly
       const response = await fetch(
@@ -129,7 +149,7 @@ function App() {
         {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${HF_API_KEY}`,
+            Authorization: `Bearer ${apiKey}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -185,9 +205,36 @@ function App() {
               />
               <small>Current: {personDailyCalories} calories/day</small>
             </div>
+            <div className="settings-group">
+              <label>Hugging Face API Key</label>
+              <div style={{display: 'flex', gap: '8px', marginTop: '8px'}}>
+                <button onClick={() => setShowApiInput(true)} className="btn-secondary">Update API Key</button>
+                {apiKey && <button onClick={resetApiKey} className="btn-danger">Reset API Key</button>}
+              </div>
+            </div>
             <div className="button-group">
               <button onClick={saveCalories} className="btn-primary">Save Settings</button>
               <button onClick={() => setShowSettings(false)} className="btn-secondary">Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showApiInput && (
+        <div className="modal-overlay" onClick={() => setShowApiInput(false)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h2>🔑 Hugging Face API Key</h2>
+            <p>Get your API key from <a href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener noreferrer">Hugging Face Settings</a></p>
+            <input
+              type="password"
+              placeholder="hf_..."
+              value={apiKey}
+              onChange={e => setApiKey(e.target.value)}
+              style={{width: '100%', padding: '8px', marginTop: '16px', marginBottom: '16px', borderRadius: '4px', border: '1px solid #ccc'}}
+            />
+            <div className="button-group">
+              <button onClick={saveApiKey} className="btn-primary">Save API Key</button>
+              <button onClick={() => setShowApiInput(false)} className="btn-secondary">Cancel</button>
             </div>
           </div>
         </div>
