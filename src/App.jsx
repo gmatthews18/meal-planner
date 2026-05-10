@@ -14,6 +14,7 @@ function App() {
   const [loadingChat, setLoadingChat] = useState(false);
   const [activeTab, setActiveTab] = useState('week'); // 'week', 'shopping', 'dashboard'
   const [shoppingList, setShoppingList] = useState([]);
+  const [customRestrictions, setCustomRestrictions] = useState([]);
 
   // Load saved data on mount
   useEffect(() => {
@@ -104,39 +105,49 @@ function App() {
 
   const mealSuggestions = {
     breakfast: [
-      { name: 'Greek Yogurt & Granola', calories: 300, protein: 15, carbs: 40, fat: 8, safe: true },
-      { name: 'Banana & Peanut Butter Toast', calories: 280, protein: 10, carbs: 35, fat: 9, safe: true },
-      { name: 'Smoothie Bowl with Granola', calories: 320, protein: 12, carbs: 45, fat: 8, safe: true },
-      { name: 'Cottage Cheese & Fruit', calories: 250, protein: 20, carbs: 30, fat: 5, safe: true },
-      { name: 'Avocado Toast with Tomato', calories: 290, protein: 8, carbs: 32, fat: 12, safe: true },
+      { name: 'Greek Yogurt & Granola', calories: 300, protein: 15, carbs: 40, fat: 8, ingredients: ['yogurt', 'granola', 'honey'] },
+      { name: 'Banana & Peanut Butter Toast', calories: 280, protein: 10, carbs: 35, fat: 9, ingredients: ['bread', 'peanut butter', 'banana', 'nuts'] },
+      { name: 'Smoothie Bowl with Granola', calories: 320, protein: 12, carbs: 45, fat: 8, ingredients: ['berries', 'yogurt', 'granola', 'honey'] },
+      { name: 'Cottage Cheese & Fruit', calories: 250, protein: 20, carbs: 30, fat: 5, ingredients: ['cottage cheese', 'berries', 'honey'] },
+      { name: 'Avocado Toast with Tomato', calories: 290, protein: 8, carbs: 32, fat: 12, ingredients: ['bread', 'avocado', 'tomato', 'olive oil'] },
+      { name: 'Oatmeal & Berries', calories: 280, protein: 8, carbs: 48, fat: 5, ingredients: ['oats', 'berries', 'honey'] },
     ],
     lunch: [
-      { name: 'Grilled Salmon & Broccoli', calories: 420, protein: 40, carbs: 35, fat: 12, safe: true },
-      { name: 'Turkey & Veggie Sandwich', calories: 380, protein: 28, carbs: 45, fat: 10, safe: true },
-      { name: 'Quinoa Buddha Bowl', calories: 420, protein: 15, carbs: 55, fat: 10, safe: true },
-      { name: 'Lean Beef Taco Bowl', calories: 450, protein: 35, carbs: 40, fat: 12, safe: true },
-      { name: 'Chickpea Curry with Rice', calories: 420, protein: 12, carbs: 60, fat: 10, safe: true },
+      { name: 'Grilled Salmon & Broccoli', calories: 420, protein: 40, carbs: 35, fat: 12, ingredients: ['salmon', 'broccoli', 'olive oil'] },
+      { name: 'Turkey & Veggie Sandwich', calories: 380, protein: 28, carbs: 45, fat: 10, ingredients: ['bread', 'turkey', 'lettuce', 'tomato'] },
+      { name: 'Quinoa Buddha Bowl', calories: 420, protein: 15, carbs: 55, fat: 10, ingredients: ['quinoa', 'chickpeas', 'vegetables'] },
+      { name: 'Lean Beef Taco Bowl', calories: 450, protein: 35, carbs: 40, fat: 12, ingredients: ['beef', 'rice', 'beans', 'vegetables'] },
+      { name: 'Chickpea Curry with Rice', calories: 420, protein: 12, carbs: 60, fat: 10, ingredients: ['chickpeas', 'rice', 'coconut milk', 'spices'] },
     ],
     dinner: [
-      { name: 'Baked Chicken Breast & Sweet Potato', calories: 480, protein: 45, carbs: 50, fat: 8, safe: true },
-      { name: 'Pasta Primavera with Chicken', calories: 500, protein: 38, carbs: 55, fat: 10, safe: true },
-      { name: 'Grilled Tilapia & Green Beans', calories: 380, protein: 42, carbs: 30, fat: 10, safe: true },
-      { name: 'Vegetable Stir-fry with Tofu', calories: 350, protein: 20, carbs: 40, fat: 12, safe: true },
-      { name: 'Slow-cooker Chili', calories: 420, protein: 28, carbs: 45, fat: 10, safe: true },
+      { name: 'Baked Chicken Breast & Sweet Potato', calories: 480, protein: 45, carbs: 50, fat: 8, ingredients: ['chicken', 'sweet potato', 'olive oil'] },
+      { name: 'Pasta Primavera with Chicken', calories: 500, protein: 38, carbs: 55, fat: 10, ingredients: ['pasta', 'chicken', 'vegetables', 'olive oil'] },
+      { name: 'Grilled Tilapia & Green Beans', calories: 380, protein: 42, carbs: 30, fat: 10, ingredients: ['tilapia', 'green beans', 'olive oil', 'lemon'] },
+      { name: 'Vegetable Stir-fry with Tofu', calories: 350, protein: 20, carbs: 40, fat: 12, ingredients: ['tofu', 'vegetables', 'soy sauce', 'rice'] },
+      { name: 'Slow-cooker Chili', calories: 420, protein: 28, carbs: 45, fat: 10, ingredients: ['beef', 'beans', 'tomatoes', 'spices'] },
     ],
     snack: [
-      { name: 'Almonds (1oz)', calories: 160, protein: 6, carbs: 6, fat: 14, safe: true },
-      { name: 'Apple & Almond Butter', calories: 200, protein: 7, carbs: 25, fat: 8, safe: true },
-      { name: 'Protein Bar', calories: 180, protein: 15, carbs: 20, fat: 5, safe: true },
-      { name: 'Yogurt & Berries', calories: 150, protein: 12, carbs: 20, fat: 2, safe: true },
-      { name: 'Hummus & Veggie Sticks', calories: 140, protein: 5, carbs: 15, fat: 6, safe: true },
+      { name: 'Almonds (1oz)', calories: 160, protein: 6, carbs: 6, fat: 14, ingredients: ['almonds', 'nuts'] },
+      { name: 'Apple & Almond Butter', calories: 200, protein: 7, carbs: 25, fat: 8, ingredients: ['apple', 'almond butter', 'nuts'] },
+      { name: 'Protein Bar', calories: 180, protein: 15, carbs: 20, fat: 5, ingredients: ['protein bar'] },
+      { name: 'Yogurt & Berries', calories: 150, protein: 12, carbs: 20, fat: 2, ingredients: ['yogurt', 'berries'] },
+      { name: 'Hummus & Veggie Sticks', calories: 140, protein: 5, carbs: 15, fat: 6, ingredients: ['hummus', 'vegetables', 'chickpeas'] },
     ],
+  };
+
+  const isIngredientsAllowed = (ingredients) => {
+    const allRestrictions = [...person.restrictions, ...customRestrictions];
+    return !ingredients.some(ing =>
+      allRestrictions.some(rest => ing.toLowerCase().includes(rest.toLowerCase()))
+    );
   };
 
   const getSuggestedMeal = (mealType) => {
     const meals = mealSuggestions[mealType] || [];
-    const safeMeals = meals.filter(m => m.safe);
-    return safeMeals[Math.floor(Math.random() * safeMeals.length)];
+    const safeMeals = meals.filter(m => isIngredientsAllowed(m.ingredients));
+    return safeMeals.length > 0
+      ? safeMeals[Math.floor(Math.random() * safeMeals.length)]
+      : meals[0];
   };
 
   const generateNutritionAdvice = () => {
@@ -194,6 +205,34 @@ function App() {
     await new Promise(resolve => setTimeout(resolve, 500));
 
     const userQuery = chatInput.toLowerCase();
+    let aiResponse = '';
+
+    // Handle custom restrictions
+    if (userQuery.includes('remove') || userQuery.includes('no ') || userQuery.includes('avoid') || userQuery.includes('exclude')) {
+      const words = userQuery.split(/\s+/);
+      const restrictionIndex = words.findIndex(w => w === 'remove' || w === 'avoid' || w === 'exclude' || w.startsWith('no'));
+      if (restrictionIndex !== -1) {
+        const restriction = words.slice(restrictionIndex + 1).join(' ').replace(/[^\w\s]/g, '');
+        if (restriction && restriction.length > 0) {
+          setCustomRestrictions([...customRestrictions, restriction]);
+          aiResponse = `Got it! I'll remove all ${restriction} from meal suggestions. Your updated preferences: ${[...person.restrictions, ...customRestrictions, restriction].join(', ')}`;
+          const aiMessage = { text: aiResponse, sender: 'ai' };
+          setChatMessages(prev => [...prev, aiMessage]);
+          setLoadingChat(false);
+          return;
+        }
+      }
+    }
+
+    // Handle clearing restrictions
+    if (userQuery.includes('reset') || userQuery.includes('clear') && userQuery.includes('restrict')) {
+      setCustomRestrictions([]);
+      aiResponse = `Restrictions cleared! Back to your default preferences: ${person.restrictions.join(', ') || 'None'}`;
+      const aiMessage = { text: aiResponse, sender: 'ai' };
+      setChatMessages(prev => [...prev, aiMessage]);
+      setLoadingChat(false);
+      return;
+    }
     const weeklyTotals = getWeeklyTotals();
     const avgDaily = Math.round(weeklyTotals.calories / 7);
     const avgProtein = Math.round(weeklyTotals.protein / 7);
