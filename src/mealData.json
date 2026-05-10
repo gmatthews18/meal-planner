@@ -1,1 +1,843 @@
-{"george":{"name":"George","currentWeight":109,"targetWeight":100,"unit":"kg","dailyCalories":1200,"restrictions":["eggs"],"weeks":[{"week":1,"days":[{"day":"Monday","meals":[{"name":"Oatmeal with Berries & Almonds","meal":"breakfast","calories":350,"protein":12,"carbs":48,"fat":10,"ingredients":["oatmeal","blueberries","almonds","honey"]},{"name":"Grilled Chicken Caesar Wrap","meal":"lunch","calories":420,"protein":35,"carbs":45,"fat":12,"ingredients":["chicken breast","whole wheat wrap","romaine","parmesan"]},{"name":"Baked Salmon with Roasted Vegetables","meal":"dinner","calories":430,"protein":38,"carbs":35,"fat":12,"ingredients":["salmon fillet","broccoli","sweet potato","olive oil"]}]},{"day":"Tuesday","meals":[{"name":"Greek Yogurt Parfait","meal":"breakfast","calories":320,"protein":20,"carbs":42,"fat":5,"ingredients":["greek yogurt","granola","strawberries","honey"]},{"name":"Turkey & Avocado Sandwich","meal":"lunch","calories":410,"protein":32,"carbs":45,"fat":12,"ingredients":["turkey breast","whole wheat bread","avocado","lettuce"]},{"name":"Lean Beef Stir-Fry with Brown Rice","meal":"dinner","calories":470,"protein":36,"carbs":48,"fat":10,"ingredients":["lean beef","brown rice","broccoli","peppers","soy sauce"]}]},{"day":"Wednesday","meals":[{"name":"Smoothie Bowl with Granola","meal":"breakfast","calories":340,"protein":15,"carbs":50,"fat":6,"ingredients":["banana","berries","almond milk","protein powder","granola"]},{"name":"Tuna Salad with Quinoa","meal":"lunch","calories":400,"protein":30,"carbs":42,"fat":10,"ingredients":["canned tuna","quinoa","cucumber","tomato","olive oil"]},{"name":"Grilled Chicken with Sweet Potato & Green Beans","meal":"dinner","calories":460,"protein":38,"carbs":46,"fat":8,"ingredients":["chicken breast","sweet potato","green beans","garlic","herbs"]}]},{"day":"Thursday","meals":[{"name":"Chia Seed Pudding","meal":"breakfast","calories":310,"protein":14,"carbs":40,"fat":10,"ingredients":["chia seeds","almond milk","maple syrup","banana"]},{"name":"Grilled Fish Tacos with Cabbage Slaw","meal":"lunch","calories":420,"protein":32,"carbs":44,"fat":11,"ingredients":["white fish","corn tortillas","cabbage","lime","cilantro"]},{"name":"Lentil Curry with Basmati Rice","meal":"dinner","calories":470,"protein":20,"carbs":62,"fat":8,"ingredients":["red lentils","basmati rice","coconut milk","curry spices"]}]},{"day":"Friday","meals":[{"name":"Whole Wheat Toast with Almond Butter & Banana","meal":"breakfast","calories":340,"protein":13,"carbs":42,"fat":11,"ingredients":["whole wheat bread","almond butter","banana"]},{"name":"Grilled Shrimp & Pasta","meal":"lunch","calories":410,"protein":28,"carbs":50,"fat":9,"ingredients":["shrimp","whole wheat pasta","garlic","lemon","olive oil"]},{"name":"Turkey Meatballs with Tomato Sauce & Vegetables","meal":"dinner","calories":450,"protein":35,"carbs":45,"fat":10,"ingredients":["ground turkey","tomato sauce","zucchini","bell peppers"]}]},{"day":"Saturday","meals":[{"name":"Pancakes with Fresh Berries","meal":"breakfast","calories":370,"protein":12,"carbs":52,"fat":8,"ingredients":["oat flour","blueberries","honey","almond milk"]},{"name":"Chicken & Vegetable Soup","meal":"lunch","calories":330,"protein":28,"carbs":38,"fat":6,"ingredients":["chicken breast","carrots","celery","potatoes","broth"]},{"name":"Baked Cod with Roasted Root Vegetables","meal":"dinner","calories":500,"protein":36,"carbs":54,"fat":9,"ingredients":["cod fillet","carrots","parsnips","herbs"]}]},{"day":"Sunday","meals":[{"name":"Vegetable & Bean Breakfast Burrito","meal":"breakfast","calories":380,"protein":16,"carbs":50,"fat":10,"ingredients":["whole wheat tortilla","black beans","peppers","tomatoes","salsa"]},{"name":"Mediterranean Chickpea Salad","meal":"lunch","calories":400,"protein":14,"carbs":52,"fat":12,"ingredients":["chickpeas","cucumber","tomato","feta","olive oil"]},{"name":"Grilled Pork Tenderloin with Quinoa & Vegetables","meal":"dinner","calories":420,"protein":40,"carbs":42,"fat":10,"ingredients":["pork tenderloin","quinoa","asparagus","mushrooms"]}]}]}]},"jude":{"name":"Jude","currentWeight":73,"targetWeight":63.5,"unit":"kg","dailyCalories":1400,"restrictions":[],"weeks":[{"week":1,"days":[{"day":"Monday","meals":[{"name":"Scrambled Eggs with Toast & Tomato","meal":"breakfast","calories":380,"protein":16,"carbs":38,"fat":14,"ingredients":["eggs","whole wheat bread","tomato","olive oil"]},{"name":"Grilled Chicken Salad with Feta","meal":"lunch","calories":450,"protein":40,"carbs":32,"fat":14,"ingredients":["chicken breast","mixed greens","feta","cucumber","vinaigrette"]},{"name":"Baked Salmon with Roasted Vegetables","meal":"dinner","calories":500,"protein":42,"carbs":38,"fat":14,"ingredients":["salmon fillet","broccoli","sweet potato","olive oil"]}]},{"day":"Tuesday","meals":[{"name":"Greek Yogurt with Granola & Berries","meal":"breakfast","calories":370,"protein":18,"carbs":48,"fat":6,"ingredients":["greek yogurt","granola","blueberries","honey"]},{"name":"Turkey & Avocado Wrap","meal":"lunch","calories":480,"protein":35,"carbs":48,"fat":14,"ingredients":["turkey breast","whole wheat wrap","avocado","lettuce"]},{"name":"Lean Beef Stir-Fry with Brown Rice","meal":"dinner","calories":520,"protein":38,"carbs":54,"fat":12,"ingredients":["lean beef","brown rice","broccoli","peppers","soy sauce"]}]},{"day":"Wednesday","meals":[{"name":"Smoothie Bowl with Granola & Coconut","meal":"breakfast","calories":390,"protein":16,"carbs":54,"fat":8,"ingredients":["banana","berries","almond milk","protein powder","granola"]},{"name":"Tuna Salad with Whole Wheat Pita","meal":"lunch","calories":460,"protein":32,"carbs":48,"fat":12,"ingredients":["canned tuna","whole wheat pita","lettuce","tomato","mayo"]},{"name":"Grilled Chicken with Sweet Potato & Vegetables","meal":"dinner","calories":510,"protein":40,"carbs":54,"fat":10,"ingredients":["chicken breast","sweet potato","green beans","garlic"]}]},{"day":"Thursday","meals":[{"name":"Veggie Omelet with Whole Wheat Toast","meal":"breakfast","calories":400,"protein":16,"carbs":42,"fat":14,"ingredients":["eggs","peppers","onions","whole wheat bread"]},{"name":"Grilled Fish Tacos with Slaw","meal":"lunch","calories":480,"protein":34,"carbs":48,"fat":13,"ingredients":["white fish","corn tortillas","cabbage","lime"]},{"name":"Lentil Curry with Basmati Rice","meal":"dinner","calories":480,"protein":18,"carbs":68,"fat":10,"ingredients":["red lentils","basmati rice","coconut milk","spices"]}]},{"day":"Friday","meals":[{"name":"Fried Eggs with Toast & Avocado","meal":"breakfast","calories":420,"protein":15,"carbs":40,"fat":16,"ingredients":["eggs","whole wheat bread","avocado"]},{"name":"Grilled Shrimp & Whole Wheat Pasta","meal":"lunch","calories":480,"protein":32,"carbs":54,"fat":10,"ingredients":["shrimp","whole wheat pasta","garlic","lemon"]},{"name":"Turkey Meatballs with Sauce & Vegetables","meal":"dinner","calories":500,"protein":38,"carbs":48,"fat":12,"ingredients":["ground turkey","tomato sauce","zucchini","peppers"]}]},{"day":"Saturday","meals":[{"name":"Pancakes with Maple Syrup & Berries","meal":"breakfast","calories":420,"protein":14,"carbs":58,"fat":10,"ingredients":["oat flour","blueberries","maple syrup","almond milk"]},{"name":"Chicken & Vegetable Soup","meal":"lunch","calories":400,"protein":32,"carbs":42,"fat":8,"ingredients":["chicken breast","carrots","potatoes","broth"]},{"name":"Baked Cod with Root Vegetables","meal":"dinner","calories":540,"protein":38,"carbs":58,"fat":10,"ingredients":["cod fillet","carrots","parsnips","herbs"]}]},{"day":"Sunday","meals":[{"name":"Breakfast Burrito with Beans & Vegetables","meal":"breakfast","calories":430,"protein":18,"carbs":54,"fat":12,"ingredients":["whole wheat tortilla","black beans","peppers","cheese"]},{"name":"Mediterranean Chickpea Salad","meal":"lunch","calories":460,"protein":16,"carbs":56,"fat":14,"ingredients":["chickpeas","cucumber","feta","tomato","olive oil"]},{"name":"Grilled Pork Tenderloin with Quinoa","meal":"dinner","calories":480,"protein":42,"carbs":48,"fat":12,"ingredients":["pork tenderloin","quinoa","asparagus","mushrooms"]}]}]}]}}
+{
+  "george": {
+    "name": "George",
+    "currentWeight": 109,
+    "targetWeight": 100,
+    "unit": "kg",
+    "dailyCalories": 1200,
+    "restrictions": ["eggs"],
+    "weeks": [
+      {
+        "week": 1,
+        "days": [
+          {
+            "day": "Monday",
+            "meals": [
+              {
+                "name": "Oatmeal with Berries & Almonds",
+                "meal": "breakfast",
+                "calories": 350,
+                "protein": 12,
+                "carbs": 48,
+                "fat": 10,
+                "prepTime": 10,
+                "ingredients": [
+                  { "name": "rolled oats", "quantity": "0.5", "unit": "cup" },
+                  { "name": "blueberries", "quantity": "0.75", "unit": "cup" },
+                  { "name": "almonds", "quantity": "20", "unit": "g" },
+                  { "name": "honey", "quantity": "1", "unit": "tbsp" },
+                  { "name": "water", "quantity": "1", "unit": "cup" }
+                ],
+                "instructions": ["Boil water and add oats", "Simmer for 5 minutes", "Top with berries, almonds, and honey"]
+              },
+              {
+                "name": "Grilled Chicken Caesar Wrap",
+                "meal": "lunch",
+                "calories": 420,
+                "protein": 35,
+                "carbs": 45,
+                "fat": 12,
+                "prepTime": 15,
+                "ingredients": [
+                  { "name": "chicken breast", "quantity": "150", "unit": "g" },
+                  { "name": "whole wheat wrap", "quantity": "1", "unit": "piece" },
+                  { "name": "romaine lettuce", "quantity": "1", "unit": "cup" },
+                  { "name": "parmesan cheese", "quantity": "20", "unit": "g" },
+                  { "name": "caesar dressing", "quantity": "2", "unit": "tbsp" }
+                ],
+                "instructions": ["Grill chicken breast until cooked", "Slice chicken", "Assemble wrap with lettuce, chicken, and cheese", "Drizzle with caesar dressing"]
+              },
+              {
+                "name": "Baked Salmon with Roasted Vegetables",
+                "meal": "dinner",
+                "calories": 430,
+                "protein": 38,
+                "carbs": 35,
+                "fat": 12,
+                "prepTime": 25,
+                "ingredients": [
+                  { "name": "salmon fillet", "quantity": "150", "unit": "g" },
+                  { "name": "broccoli", "quantity": "150", "unit": "g" },
+                  { "name": "sweet potato", "quantity": "100", "unit": "g" },
+                  { "name": "olive oil", "quantity": "1", "unit": "tbsp" },
+                  { "name": "lemon", "quantity": "0.5", "unit": "piece" }
+                ],
+                "instructions": ["Preheat oven to 400°F", "Season salmon with lemon and herbs", "Toss vegetables with olive oil", "Bake everything for 20 minutes"]
+              }
+            ]
+          },
+          {
+            "day": "Tuesday",
+            "meals": [
+              {
+                "name": "Greek Yogurt Parfait",
+                "meal": "breakfast",
+                "calories": 320,
+                "protein": 20,
+                "carbs": 42,
+                "fat": 5,
+                "prepTime": 5,
+                "ingredients": [
+                  { "name": "greek yogurt", "quantity": "150", "unit": "g" },
+                  { "name": "granola", "quantity": "30", "unit": "g" },
+                  { "name": "strawberries", "quantity": "0.75", "unit": "cup" },
+                  { "name": "honey", "quantity": "1", "unit": "tsp" }
+                ],
+                "instructions": ["Layer yogurt in bowl", "Top with granola", "Add strawberries", "Drizzle with honey"]
+              },
+              {
+                "name": "Turkey & Avocado Sandwich",
+                "meal": "lunch",
+                "calories": 410,
+                "protein": 32,
+                "carbs": 45,
+                "fat": 12,
+                "prepTime": 10,
+                "ingredients": [
+                  { "name": "turkey breast", "quantity": "150", "unit": "g" },
+                  { "name": "whole wheat bread", "quantity": "2", "unit": "slices" },
+                  { "name": "avocado", "quantity": "0.5", "unit": "piece" },
+                  { "name": "lettuce", "quantity": "2", "unit": "leaves" },
+                  { "name": "tomato", "quantity": "0.5", "unit": "piece" }
+                ],
+                "instructions": ["Toast bread", "Spread avocado on bread", "Layer turkey, lettuce, and tomato", "Slice and serve"]
+              },
+              {
+                "name": "Lean Beef Stir-Fry with Brown Rice",
+                "meal": "dinner",
+                "calories": 470,
+                "protein": 36,
+                "carbs": 48,
+                "fat": 10,
+                "prepTime": 20,
+                "ingredients": [
+                  { "name": "lean beef", "quantity": "150", "unit": "g" },
+                  { "name": "brown rice", "quantity": "0.75", "unit": "cup" },
+                  { "name": "broccoli", "quantity": "150", "unit": "g" },
+                  { "name": "bell peppers", "quantity": "100", "unit": "g" },
+                  { "name": "low sodium soy sauce", "quantity": "2", "unit": "tbsp" },
+                  { "name": "garlic", "quantity": "2", "unit": "cloves" }
+                ],
+                "instructions": ["Cook brown rice", "Heat wok or large pan", "Stir-fry beef until done", "Add vegetables and soy sauce", "Serve over rice"]
+              }
+            ]
+          },
+          {
+            "day": "Wednesday",
+            "meals": [
+              {
+                "name": "Smoothie Bowl with Granola",
+                "meal": "breakfast",
+                "calories": 340,
+                "protein": 15,
+                "carbs": 50,
+                "fat": 6,
+                "prepTime": 8,
+                "ingredients": [
+                  { "name": "frozen banana", "quantity": "1", "unit": "piece" },
+                  { "name": "mixed berries", "quantity": "0.75", "unit": "cup" },
+                  { "name": "almond milk", "quantity": "0.5", "unit": "cup" },
+                  { "name": "protein powder", "quantity": "20", "unit": "g" },
+                  { "name": "granola", "quantity": "25", "unit": "g" }
+                ],
+                "instructions": ["Blend banana, berries, almond milk, and protein powder", "Pour into bowl", "Top with granola and extra berries"]
+              },
+              {
+                "name": "Tuna Salad with Quinoa",
+                "meal": "lunch",
+                "calories": 400,
+                "protein": 30,
+                "carbs": 42,
+                "fat": 10,
+                "prepTime": 12,
+                "ingredients": [
+                  { "name": "canned tuna", "quantity": "100", "unit": "g" },
+                  { "name": "cooked quinoa", "quantity": "0.75", "unit": "cup" },
+                  { "name": "cucumber", "quantity": "100", "unit": "g" },
+                  { "name": "tomato", "quantity": "1", "unit": "piece" },
+                  { "name": "olive oil", "quantity": "1", "unit": "tbsp" },
+                  { "name": "lemon juice", "quantity": "1", "unit": "tbsp" }
+                ],
+                "instructions": ["Drain tuna", "Dice vegetables", "Mix tuna with quinoa and vegetables", "Dress with olive oil and lemon juice"]
+              },
+              {
+                "name": "Shared Grilled Chicken with Root Vegetables",
+                "meal": "dinner",
+                "calories": 460,
+                "protein": 38,
+                "carbs": 46,
+                "fat": 8,
+                "prepTime": 25,
+                "isShared": true,
+                "ingredients": [
+                  { "name": "chicken breast", "quantity": "150", "unit": "g" },
+                  { "name": "sweet potato", "quantity": "120", "unit": "g" },
+                  { "name": "green beans", "quantity": "150", "unit": "g" },
+                  { "name": "olive oil", "quantity": "1", "unit": "tbsp" },
+                  { "name": "garlic", "quantity": "2", "unit": "cloves" },
+                  { "name": "herbs", "quantity": "1", "unit": "tsp" }
+                ],
+                "instructions": ["Preheat oven to 400°F", "Season chicken with garlic and herbs", "Chop vegetables", "Arrange on baking sheet with olive oil", "Bake for 25 minutes until chicken is cooked"]
+              }
+            ]
+          },
+          {
+            "day": "Thursday",
+            "meals": [
+              {
+                "name": "Chia Seed Pudding",
+                "meal": "breakfast",
+                "calories": 310,
+                "protein": 14,
+                "carbs": 40,
+                "fat": 10,
+                "prepTime": 5,
+                "ingredients": [
+                  { "name": "chia seeds", "quantity": "25", "unit": "g" },
+                  { "name": "almond milk", "quantity": "1", "unit": "cup" },
+                  { "name": "maple syrup", "quantity": "0.5", "unit": "tbsp" },
+                  { "name": "banana", "quantity": "0.5", "unit": "piece" }
+                ],
+                "instructions": ["Mix chia seeds with almond milk", "Let sit for 5 minutes", "Top with banana slices and maple syrup", "Refrigerate if desired"]
+              },
+              {
+                "name": "Grilled Fish Tacos with Cabbage Slaw",
+                "meal": "lunch",
+                "calories": 420,
+                "protein": 32,
+                "carbs": 44,
+                "fat": 11,
+                "prepTime": 18,
+                "ingredients": [
+                  { "name": "white fish fillet", "quantity": "150", "unit": "g" },
+                  { "name": "corn tortillas", "quantity": "2", "unit": "pieces" },
+                  { "name": "shredded cabbage", "quantity": "1", "unit": "cup" },
+                  { "name": "lime", "quantity": "0.5", "unit": "piece" },
+                  { "name": "cilantro", "quantity": "5", "unit": "g" },
+                  { "name": "olive oil", "quantity": "1", "unit": "tbsp" }
+                ],
+                "instructions": ["Season and grill fish", "Warm tortillas", "Make slaw with cabbage and lime", "Assemble tacos with fish, cabbage, and cilantro"]
+              },
+              {
+                "name": "Lentil Curry with Basmati Rice",
+                "meal": "dinner",
+                "calories": 470,
+                "protein": 20,
+                "carbs": 62,
+                "fat": 8,
+                "prepTime": 30,
+                "ingredients": [
+                  { "name": "red lentils", "quantity": "0.75", "unit": "cup" },
+                  { "name": "basmati rice", "quantity": "0.75", "unit": "cup" },
+                  { "name": "coconut milk", "quantity": "0.5", "unit": "cup" },
+                  { "name": "curry powder", "quantity": "2", "unit": "tsp" },
+                  { "name": "onion", "quantity": "0.5", "unit": "piece" },
+                  { "name": "garlic", "quantity": "2", "unit": "cloves" },
+                  { "name": "spinach", "quantity": "50", "unit": "g" }
+                ],
+                "instructions": ["Cook rice", "Sauté onion and garlic", "Add lentils and curry powder", "Pour in coconut milk and simmer", "Add spinach at end", "Serve with rice"]
+              }
+            ]
+          },
+          {
+            "day": "Friday",
+            "meals": [
+              {
+                "name": "Whole Wheat Toast with Almond Butter & Banana",
+                "meal": "breakfast",
+                "calories": 340,
+                "protein": 13,
+                "carbs": 42,
+                "fat": 11,
+                "prepTime": 5,
+                "ingredients": [
+                  { "name": "whole wheat bread", "quantity": "2", "unit": "slices" },
+                  { "name": "almond butter", "quantity": "2", "unit": "tbsp" },
+                  { "name": "banana", "quantity": "1", "unit": "piece" }
+                ],
+                "instructions": ["Toast bread", "Spread almond butter", "Top with banana slices"]
+              },
+              {
+                "name": "Grilled Shrimp & Pasta",
+                "meal": "lunch",
+                "calories": 410,
+                "protein": 28,
+                "carbs": 50,
+                "fat": 9,
+                "prepTime": 15,
+                "ingredients": [
+                  { "name": "shrimp", "quantity": "150", "unit": "g" },
+                  { "name": "whole wheat pasta", "quantity": "150", "unit": "g" },
+                  { "name": "garlic", "quantity": "2", "unit": "cloves" },
+                  { "name": "lemon", "quantity": "0.5", "unit": "piece" },
+                  { "name": "olive oil", "quantity": "1", "unit": "tbsp" },
+                  { "name": "fresh parsley", "quantity": "5", "unit": "g" }
+                ],
+                "instructions": ["Cook pasta", "Heat olive oil and sauté garlic", "Cook shrimp until pink", "Toss with pasta, lemon, and parsley"]
+              },
+              {
+                "name": "Turkey Meatballs with Tomato Sauce & Vegetables",
+                "meal": "dinner",
+                "calories": 450,
+                "protein": 35,
+                "carbs": 45,
+                "fat": 10,
+                "prepTime": 28,
+                "ingredients": [
+                  { "name": "ground turkey", "quantity": "150", "unit": "g" },
+                  { "name": "whole wheat breadcrumbs", "quantity": "25", "unit": "g" },
+                  { "name": "tomato sauce", "quantity": "150", "unit": "ml" },
+                  { "name": "zucchini", "quantity": "150", "unit": "g" },
+                  { "name": "bell peppers", "quantity": "100", "unit": "g" },
+                  { "name": "garlic", "quantity": "2", "unit": "cloves" }
+                ],
+                "instructions": ["Mix ground turkey with breadcrumbs", "Form into meatballs", "Bake at 375°F for 18 minutes", "Simmer with tomato sauce", "Serve with roasted vegetables"]
+              }
+            ]
+          },
+          {
+            "day": "Saturday",
+            "meals": [
+              {
+                "name": "Whole Grain Pancakes with Fresh Berries",
+                "meal": "breakfast",
+                "calories": 370,
+                "protein": 12,
+                "carbs": 52,
+                "fat": 8,
+                "prepTime": 15,
+                "ingredients": [
+                  { "name": "oat flour", "quantity": "0.75", "unit": "cup" },
+                  { "name": "banana", "quantity": "1", "unit": "piece" },
+                  { "name": "almond milk", "quantity": "0.75", "unit": "cup" },
+                  { "name": "blueberries", "quantity": "0.75", "unit": "cup" },
+                  { "name": "honey", "quantity": "1", "unit": "tbsp" }
+                ],
+                "instructions": ["Mix oat flour, mashed banana, and almond milk", "Cook pancakes on griddle", "Top with blueberries and honey"]
+              },
+              {
+                "name": "Chicken & Vegetable Soup",
+                "meal": "lunch",
+                "calories": 330,
+                "protein": 28,
+                "carbs": 38,
+                "fat": 6,
+                "prepTime": 35,
+                "ingredients": [
+                  { "name": "chicken breast", "quantity": "150", "unit": "g" },
+                  { "name": "carrots", "quantity": "100", "unit": "g" },
+                  { "name": "celery", "quantity": "50", "unit": "g" },
+                  { "name": "potatoes", "quantity": "100", "unit": "g" },
+                  { "name": "low sodium broth", "quantity": "1.5", "unit": "liter" }
+                ],
+                "instructions": ["Dice all vegetables", "Bring broth to boil", "Add chicken and vegetables", "Simmer for 25 minutes until chicken is cooked"]
+              },
+              {
+                "name": "Shared Baked Cod with Roasted Root Vegetables",
+                "meal": "dinner",
+                "calories": 500,
+                "protein": 36,
+                "carbs": 54,
+                "fat": 9,
+                "prepTime": 30,
+                "isShared": true,
+                "ingredients": [
+                  { "name": "cod fillet", "quantity": "150", "unit": "g" },
+                  { "name": "carrots", "quantity": "100", "unit": "g" },
+                  { "name": "parsnips", "quantity": "100", "unit": "g" },
+                  { "name": "olive oil", "quantity": "1", "unit": "tbsp" },
+                  { "name": "fresh herbs", "quantity": "1", "unit": "tsp" },
+                  { "name": "lemon", "quantity": "0.5", "unit": "piece" }
+                ],
+                "instructions": ["Preheat oven to 400°F", "Cut vegetables into chunks", "Toss with olive oil", "Season cod with herbs and lemon", "Bake for 25 minutes"]
+              }
+            ]
+          },
+          {
+            "day": "Sunday",
+            "meals": [
+              {
+                "name": "Vegetable & Bean Breakfast Burrito",
+                "meal": "breakfast",
+                "calories": 380,
+                "protein": 16,
+                "carbs": 50,
+                "fat": 10,
+                "prepTime": 12,
+                "ingredients": [
+                  { "name": "whole wheat tortilla", "quantity": "1", "unit": "piece" },
+                  { "name": "black beans", "quantity": "0.75", "unit": "cup" },
+                  { "name": "bell peppers", "quantity": "100", "unit": "g" },
+                  { "name": "tomatoes", "quantity": "100", "unit": "g" },
+                  { "name": "salsa", "quantity": "3", "unit": "tbsp" },
+                  { "name": "avocado", "quantity": "0.25", "unit": "piece" }
+                ],
+                "instructions": ["Warm tortilla", "Heat beans", "Sauté peppers and tomatoes", "Assemble burrito with beans, vegetables, and salsa"]
+              },
+              {
+                "name": "Mediterranean Chickpea Salad",
+                "meal": "lunch",
+                "calories": 400,
+                "protein": 14,
+                "carbs": 52,
+                "fat": 12,
+                "prepTime": 10,
+                "ingredients": [
+                  { "name": "canned chickpeas", "quantity": "1", "unit": "cup" },
+                  { "name": "cucumber", "quantity": "150", "unit": "g" },
+                  { "name": "tomato", "quantity": "1", "unit": "piece" },
+                  { "name": "feta cheese", "quantity": "30", "unit": "g" },
+                  { "name": "olive oil", "quantity": "2", "unit": "tbsp" },
+                  { "name": "lemon juice", "quantity": "1", "unit": "tbsp" },
+                  { "name": "parsley", "quantity": "10", "unit": "g" }
+                ],
+                "instructions": ["Rinse chickpeas", "Dice vegetables", "Mix with feta", "Dress with olive oil and lemon juice"]
+              },
+              {
+                "name": "Grilled Pork Tenderloin with Quinoa & Vegetables",
+                "meal": "dinner",
+                "calories": 420,
+                "protein": 40,
+                "carbs": 42,
+                "fat": 10,
+                "prepTime": 25,
+                "ingredients": [
+                  { "name": "pork tenderloin", "quantity": "150", "unit": "g" },
+                  { "name": "cooked quinoa", "quantity": "0.75", "unit": "cup" },
+                  { "name": "asparagus", "quantity": "150", "unit": "g" },
+                  { "name": "mushrooms", "quantity": "100", "unit": "g" },
+                  { "name": "olive oil", "quantity": "1", "unit": "tbsp" },
+                  { "name": "garlic", "quantity": "2", "unit": "cloves" }
+                ],
+                "instructions": ["Season pork with garlic", "Grill for 12 minutes per side", "Sauté asparagus and mushrooms", "Serve with quinoa"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "jude": {
+    "name": "Jude",
+    "currentWeight": 73,
+    "targetWeight": 63.5,
+    "unit": "kg",
+    "dailyCalories": 1400,
+    "restrictions": [],
+    "weeks": [
+      {
+        "week": 1,
+        "days": [
+          {
+            "day": "Monday",
+            "meals": [
+              {
+                "name": "Scrambled Eggs with Toast & Tomato",
+                "meal": "breakfast",
+                "calories": 380,
+                "protein": 16,
+                "carbs": 38,
+                "fat": 14,
+                "prepTime": 10,
+                "ingredients": [
+                  { "name": "eggs", "quantity": "2", "unit": "pieces" },
+                  { "name": "whole wheat bread", "quantity": "2", "unit": "slices" },
+                  { "name": "tomato", "quantity": "0.5", "unit": "piece" },
+                  { "name": "olive oil", "quantity": "1", "unit": "tbsp" },
+                  { "name": "butter", "quantity": "0.5", "unit": "tbsp" }
+                ],
+                "instructions": ["Heat pan with butter", "Scramble eggs until cooked", "Toast bread", "Serve with sliced tomato"]
+              },
+              {
+                "name": "Grilled Chicken Salad with Feta",
+                "meal": "lunch",
+                "calories": 450,
+                "protein": 40,
+                "carbs": 32,
+                "fat": 14,
+                "prepTime": 15,
+                "ingredients": [
+                  { "name": "chicken breast", "quantity": "150", "unit": "g" },
+                  { "name": "mixed greens", "quantity": "2", "unit": "cups" },
+                  { "name": "feta cheese", "quantity": "30", "unit": "g" },
+                  { "name": "cucumber", "quantity": "100", "unit": "g" },
+                  { "name": "olive oil vinaigrette", "quantity": "3", "unit": "tbsp" }
+                ],
+                "instructions": ["Grill chicken breast", "Slice chicken", "Toss greens with cucumber and feta", "Top with chicken and dressing"]
+              },
+              {
+                "name": "Baked Salmon with Roasted Vegetables",
+                "meal": "dinner",
+                "calories": 500,
+                "protein": 42,
+                "carbs": 38,
+                "fat": 14,
+                "prepTime": 25,
+                "ingredients": [
+                  { "name": "salmon fillet", "quantity": "180", "unit": "g" },
+                  { "name": "broccoli", "quantity": "150", "unit": "g" },
+                  { "name": "sweet potato", "quantity": "120", "unit": "g" },
+                  { "name": "olive oil", "quantity": "1.5", "unit": "tbsp" },
+                  { "name": "lemon", "quantity": "0.5", "unit": "piece" }
+                ],
+                "instructions": ["Preheat oven to 400°F", "Season salmon", "Toss vegetables with olive oil", "Bake for 20 minutes"]
+              }
+            ]
+          },
+          {
+            "day": "Tuesday",
+            "meals": [
+              {
+                "name": "Greek Yogurt with Granola & Berries",
+                "meal": "breakfast",
+                "calories": 370,
+                "protein": 18,
+                "carbs": 48,
+                "fat": 6,
+                "prepTime": 5,
+                "ingredients": [
+                  { "name": "greek yogurt", "quantity": "180", "unit": "g" },
+                  { "name": "granola", "quantity": "35", "unit": "g" },
+                  { "name": "blueberries", "quantity": "0.75", "unit": "cup" },
+                  { "name": "honey", "quantity": "1.5", "unit": "tsp" }
+                ],
+                "instructions": ["Layer yogurt in bowl", "Add granola and berries", "Drizzle with honey"]
+              },
+              {
+                "name": "Turkey & Avocado Wrap",
+                "meal": "lunch",
+                "calories": 480,
+                "protein": 35,
+                "carbs": 48,
+                "fat": 14,
+                "prepTime": 12,
+                "ingredients": [
+                  { "name": "turkey breast", "quantity": "150", "unit": "g" },
+                  { "name": "whole wheat wrap", "quantity": "1", "unit": "piece" },
+                  { "name": "avocado", "quantity": "0.75", "unit": "piece" },
+                  { "name": "lettuce", "quantity": "2", "unit": "leaves" },
+                  { "name": "tomato", "quantity": "0.75", "unit": "piece" }
+                ],
+                "instructions": ["Layer all ingredients in wrap", "Roll tightly", "Cut in half and serve"]
+              },
+              {
+                "name": "Lean Beef Stir-Fry with Brown Rice",
+                "meal": "dinner",
+                "calories": 520,
+                "protein": 38,
+                "carbs": 54,
+                "fat": 12,
+                "prepTime": 20,
+                "ingredients": [
+                  { "name": "lean beef", "quantity": "150", "unit": "g" },
+                  { "name": "brown rice", "quantity": "1", "unit": "cup" },
+                  { "name": "broccoli", "quantity": "150", "unit": "g" },
+                  { "name": "bell peppers", "quantity": "100", "unit": "g" },
+                  { "name": "low sodium soy sauce", "quantity": "2", "unit": "tbsp" },
+                  { "name": "garlic", "quantity": "2", "unit": "cloves" }
+                ],
+                "instructions": ["Cook brown rice", "Stir-fry beef", "Add vegetables and sauce", "Combine with rice"]
+              }
+            ]
+          },
+          {
+            "day": "Wednesday",
+            "meals": [
+              {
+                "name": "Smoothie Bowl with Granola & Coconut",
+                "meal": "breakfast",
+                "calories": 390,
+                "protein": 16,
+                "carbs": 54,
+                "fat": 8,
+                "prepTime": 8,
+                "ingredients": [
+                  { "name": "frozen banana", "quantity": "1", "unit": "piece" },
+                  { "name": "mixed berries", "quantity": "0.75", "unit": "cup" },
+                  { "name": "almond milk", "quantity": "0.5", "unit": "cup" },
+                  { "name": "protein powder", "quantity": "20", "unit": "g" },
+                  { "name": "granola", "quantity": "30", "unit": "g" },
+                  { "name": "shredded coconut", "quantity": "10", "unit": "g" }
+                ],
+                "instructions": ["Blend banana, berries, milk, and protein", "Pour into bowl", "Top with granola and coconut"]
+              },
+              {
+                "name": "Tuna Salad with Whole Wheat Pita",
+                "meal": "lunch",
+                "calories": 460,
+                "protein": 32,
+                "carbs": 48,
+                "fat": 12,
+                "prepTime": 12,
+                "ingredients": [
+                  { "name": "canned tuna", "quantity": "100", "unit": "g" },
+                  { "name": "whole wheat pita", "quantity": "1", "unit": "piece" },
+                  { "name": "lettuce", "quantity": "2", "unit": "cups" },
+                  { "name": "tomato", "quantity": "1", "unit": "piece" },
+                  { "name": "low fat mayo", "quantity": "2", "unit": "tbsp" },
+                  { "name": "cucumber", "quantity": "100", "unit": "g" }
+                ],
+                "instructions": ["Mix tuna with mayo", "Stuff pita with lettuce", "Add tuna mix and vegetables"]
+              },
+              {
+                "name": "Shared Grilled Chicken with Root Vegetables",
+                "meal": "dinner",
+                "calories": 460,
+                "protein": 38,
+                "carbs": 46,
+                "fat": 8,
+                "prepTime": 25,
+                "isShared": true,
+                "ingredients": [
+                  { "name": "chicken breast", "quantity": "150", "unit": "g" },
+                  { "name": "sweet potato", "quantity": "120", "unit": "g" },
+                  { "name": "green beans", "quantity": "150", "unit": "g" },
+                  { "name": "olive oil", "quantity": "1", "unit": "tbsp" },
+                  { "name": "garlic", "quantity": "2", "unit": "cloves" },
+                  { "name": "herbs", "quantity": "1", "unit": "tsp" }
+                ],
+                "instructions": ["Preheat oven to 400°F", "Season chicken with garlic and herbs", "Chop vegetables", "Arrange on baking sheet with olive oil", "Bake for 25 minutes until chicken is cooked"]
+              }
+            ]
+          },
+          {
+            "day": "Thursday",
+            "meals": [
+              {
+                "name": "Veggie Omelet with Whole Wheat Toast",
+                "meal": "breakfast",
+                "calories": 400,
+                "protein": 16,
+                "carbs": 42,
+                "fat": 14,
+                "prepTime": 12,
+                "ingredients": [
+                  { "name": "eggs", "quantity": "2", "unit": "pieces" },
+                  { "name": "bell peppers", "quantity": "75", "unit": "g" },
+                  { "name": "onion", "quantity": "0.5", "unit": "piece" },
+                  { "name": "whole wheat bread", "quantity": "2", "unit": "slices" },
+                  { "name": "butter", "quantity": "1", "unit": "tbsp" }
+                ],
+                "instructions": ["Sauté peppers and onions", "Pour beaten eggs over vegetables", "Cook until set", "Fold omelet and serve with toast"]
+              },
+              {
+                "name": "Grilled Fish Tacos with Slaw",
+                "meal": "lunch",
+                "calories": 480,
+                "protein": 34,
+                "carbs": 48,
+                "fat": 13,
+                "prepTime": 18,
+                "ingredients": [
+                  { "name": "white fish fillet", "quantity": "150", "unit": "g" },
+                  { "name": "corn tortillas", "quantity": "2", "unit": "pieces" },
+                  { "name": "shredded cabbage", "quantity": "1.5", "unit": "cups" },
+                  { "name": "lime", "quantity": "0.5", "unit": "piece" },
+                  { "name": "cilantro", "quantity": "10", "unit": "g" },
+                  { "name": "olive oil", "quantity": "1", "unit": "tbsp" }
+                ],
+                "instructions": ["Grill seasoned fish", "Warm tortillas", "Make slaw with cabbage and lime dressing", "Assemble tacos"]
+              },
+              {
+                "name": "Lentil Curry with Basmati Rice",
+                "meal": "dinner",
+                "calories": 480,
+                "protein": 18,
+                "carbs": 68,
+                "fat": 10,
+                "prepTime": 30,
+                "ingredients": [
+                  { "name": "red lentils", "quantity": "0.75", "unit": "cup" },
+                  { "name": "basmati rice", "quantity": "0.75", "unit": "cup" },
+                  { "name": "coconut milk", "quantity": "0.75", "unit": "cup" },
+                  { "name": "curry powder", "quantity": "2", "unit": "tsp" },
+                  { "name": "onion", "quantity": "0.5", "unit": "piece" },
+                  { "name": "garlic", "quantity": "2", "unit": "cloves" },
+                  { "name": "spinach", "quantity": "50", "unit": "g" }
+                ],
+                "instructions": ["Cook rice", "Sauté aromatics", "Add lentils and curry", "Add coconut milk and simmer 20 min", "Stir in spinach", "Serve with rice"]
+              }
+            ]
+          },
+          {
+            "day": "Friday",
+            "meals": [
+              {
+                "name": "Fried Eggs with Toast & Avocado",
+                "meal": "breakfast",
+                "calories": 420,
+                "protein": 15,
+                "carbs": 40,
+                "fat": 16,
+                "prepTime": 10,
+                "ingredients": [
+                  { "name": "eggs", "quantity": "2", "unit": "pieces" },
+                  { "name": "whole wheat bread", "quantity": "2", "unit": "slices" },
+                  { "name": "avocado", "quantity": "0.5", "unit": "piece" },
+                  { "name": "butter", "quantity": "1", "unit": "tbsp" }
+                ],
+                "instructions": ["Heat butter in pan", "Fry eggs until desired doneness", "Toast bread", "Spread avocado on toast", "Serve with eggs"]
+              },
+              {
+                "name": "Grilled Shrimp & Whole Wheat Pasta",
+                "meal": "lunch",
+                "calories": 480,
+                "protein": 32,
+                "carbs": 54,
+                "fat": 10,
+                "prepTime": 15,
+                "ingredients": [
+                  { "name": "shrimp", "quantity": "150", "unit": "g" },
+                  { "name": "whole wheat pasta", "quantity": "150", "unit": "g" },
+                  { "name": "garlic", "quantity": "3", "unit": "cloves" },
+                  { "name": "lemon", "quantity": "0.5", "unit": "piece" },
+                  { "name": "olive oil", "quantity": "1.5", "unit": "tbsp" },
+                  { "name": "fresh parsley", "quantity": "10", "unit": "g" }
+                ],
+                "instructions": ["Cook pasta al dente", "Sauté garlic in olive oil", "Cook shrimp 3-4 minutes", "Toss with pasta, lemon, and parsley"]
+              },
+              {
+                "name": "Turkey Meatballs with Sauce & Vegetables",
+                "meal": "dinner",
+                "calories": 500,
+                "protein": 38,
+                "carbs": 48,
+                "fat": 12,
+                "prepTime": 28,
+                "ingredients": [
+                  { "name": "ground turkey", "quantity": "150", "unit": "g" },
+                  { "name": "whole wheat breadcrumbs", "quantity": "30", "unit": "g" },
+                  { "name": "tomato sauce", "quantity": "200", "unit": "ml" },
+                  { "name": "zucchini", "quantity": "150", "unit": "g" },
+                  { "name": "bell peppers", "quantity": "100", "unit": "g" },
+                  { "name": "garlic", "quantity": "2", "unit": "cloves" },
+                  { "name": "olive oil", "quantity": "1", "unit": "tbsp" }
+                ],
+                "instructions": ["Mix turkey with breadcrumbs", "Form balls", "Bake at 375°F for 18 min", "Simmer in tomato sauce", "Serve with roasted vegetables"]
+              }
+            ]
+          },
+          {
+            "day": "Saturday",
+            "meals": [
+              {
+                "name": "Pancakes with Maple Syrup & Berries",
+                "meal": "breakfast",
+                "calories": 420,
+                "protein": 14,
+                "carbs": 58,
+                "fat": 10,
+                "prepTime": 15,
+                "ingredients": [
+                  { "name": "oat flour", "quantity": "1", "unit": "cup" },
+                  { "name": "banana", "quantity": "1", "unit": "piece" },
+                  { "name": "almond milk", "quantity": "0.75", "unit": "cup" },
+                  { "name": "blueberries", "quantity": "0.75", "unit": "cup" },
+                  { "name": "maple syrup", "quantity": "2", "unit": "tbsp" },
+                  { "name": "butter", "quantity": "0.5", "unit": "tbsp" }
+                ],
+                "instructions": ["Mix flour, mashed banana, and milk", "Cook pancakes on buttered griddle", "Top with berries and syrup"]
+              },
+              {
+                "name": "Chicken & Vegetable Soup",
+                "meal": "lunch",
+                "calories": 400,
+                "protein": 32,
+                "carbs": 42,
+                "fat": 8,
+                "prepTime": 35,
+                "ingredients": [
+                  { "name": "chicken breast", "quantity": "150", "unit": "g" },
+                  { "name": "carrots", "quantity": "100", "unit": "g" },
+                  { "name": "potatoes", "quantity": "100", "unit": "g" },
+                  { "name": "celery", "quantity": "50", "unit": "g" },
+                  { "name": "low sodium broth", "quantity": "1.5", "unit": "liter" }
+                ],
+                "instructions": ["Dice vegetables", "Boil broth", "Add chicken and vegetables", "Simmer 25 minutes until cooked"]
+              },
+              {
+                "name": "Shared Baked Cod with Roasted Root Vegetables",
+                "meal": "dinner",
+                "calories": 500,
+                "protein": 36,
+                "carbs": 54,
+                "fat": 9,
+                "prepTime": 30,
+                "isShared": true,
+                "ingredients": [
+                  { "name": "cod fillet", "quantity": "150", "unit": "g" },
+                  { "name": "carrots", "quantity": "100", "unit": "g" },
+                  { "name": "parsnips", "quantity": "100", "unit": "g" },
+                  { "name": "olive oil", "quantity": "1", "unit": "tbsp" },
+                  { "name": "fresh herbs", "quantity": "1", "unit": "tsp" },
+                  { "name": "lemon", "quantity": "0.5", "unit": "piece" }
+                ],
+                "instructions": ["Preheat oven to 400°F", "Cut vegetables into chunks", "Toss with olive oil", "Season cod with herbs and lemon", "Bake for 25 minutes"]
+              }
+            ]
+          },
+          {
+            "day": "Sunday",
+            "meals": [
+              {
+                "name": "Breakfast Burrito with Beans & Vegetables",
+                "meal": "breakfast",
+                "calories": 430,
+                "protein": 18,
+                "carbs": 54,
+                "fat": 12,
+                "prepTime": 12,
+                "ingredients": [
+                  { "name": "whole wheat tortilla", "quantity": "1", "unit": "piece" },
+                  { "name": "black beans", "quantity": "0.75", "unit": "cup" },
+                  { "name": "bell peppers", "quantity": "100", "unit": "g" },
+                  { "name": "shredded cheese", "quantity": "25", "unit": "g" },
+                  { "name": "eggs", "quantity": "1", "unit": "piece" },
+                  { "name": "salsa", "quantity": "3", "unit": "tbsp" }
+                ],
+                "instructions": ["Warm tortilla", "Heat beans", "Scramble egg", "Sauté peppers", "Assemble burrito"]
+              },
+              {
+                "name": "Mediterranean Chickpea Salad",
+                "meal": "lunch",
+                "calories": 460,
+                "protein": 16,
+                "carbs": 56,
+                "fat": 14,
+                "prepTime": 10,
+                "ingredients": [
+                  { "name": "canned chickpeas", "quantity": "1.25", "unit": "cup" },
+                  { "name": "cucumber", "quantity": "150", "unit": "g" },
+                  { "name": "tomato", "quantity": "1", "unit": "piece" },
+                  { "name": "feta cheese", "quantity": "35", "unit": "g" },
+                  { "name": "olive oil", "quantity": "2.5", "unit": "tbsp" },
+                  { "name": "lemon juice", "quantity": "1", "unit": "tbsp" },
+                  { "name": "parsley", "quantity": "10", "unit": "g" }
+                ],
+                "instructions": ["Drain chickpeas", "Dice vegetables", "Mix with feta", "Dress with olive oil and lemon"]
+              },
+              {
+                "name": "Grilled Pork Tenderloin with Quinoa",
+                "meal": "dinner",
+                "calories": 480,
+                "protein": 42,
+                "carbs": 48,
+                "fat": 12,
+                "prepTime": 25,
+                "ingredients": [
+                  { "name": "pork tenderloin", "quantity": "160", "unit": "g" },
+                  { "name": "cooked quinoa", "quantity": "1", "unit": "cup" },
+                  { "name": "asparagus", "quantity": "150", "unit": "g" },
+                  { "name": "mushrooms", "quantity": "100", "unit": "g" },
+                  { "name": "olive oil", "quantity": "1.5", "unit": "tbsp" },
+                  { "name": "garlic", "quantity": "2", "unit": "cloves" }
+                ],
+                "instructions": ["Season pork with garlic", "Grill 12 min per side", "Sauté asparagus and mushrooms", "Serve with quinoa"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
