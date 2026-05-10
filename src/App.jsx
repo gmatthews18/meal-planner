@@ -9,6 +9,10 @@ function App() {
   const [dailyCalories, setDailyCalories] = useState({});
   const [showSettings, setShowSettings] = useState(false);
   const [editingCalories, setEditingCalories] = useState({});
+  const [apiKey, setApiKey] = useState(localStorage.getItem('hf_api_key') || '');
+  const [showApiInput, setShowApiInput] = useState(!apiKey);
+  const [aiResponse, setAiResponse] = useState('');
+  const [loadingMeal, setLoadingMeal] = useState(null);
 
   // Load saved data on mount
   useEffect(() => {
@@ -22,8 +26,49 @@ function App() {
     });
   }, []);
 
-  const handleAISuggestions = () => {
-    alert('AI suggestions coming soon! Set up your preferred AI service:\n\n• Ollama (local)\n• Hugging Face\n• Together AI\n• Open Router\n\nFor now, you can manually edit meal names and calorie targets.');
+  const saveApiKey = () => {
+    if (apiKey.trim()) {
+      localStorage.setItem('hf_api_key', apiKey);
+      setShowApiInput(false);
+    }
+  };
+
+  const changeMeal = async (dayIndex, mealType) => {
+    if (!apiKey) {
+      setShowApiInput(true);
+      return;
+    }
+
+    const day = currentWeekData.days[dayIndex];
+    const meal = day.meals.find(m => m.meal === mealType);
+    const mealName = getMealName(dayIndex, mealType, meal.name);
+    setLoadingMeal(`${dayIndex}-${mealType}`);
+    setAiResponse('');
+
+    try {
+      const response = await fetch(
+        'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1',
+        {
+          headers: { Authorization: `Bearer ${apiKey}` },
+          method: 'POST',
+          body: JSON.stringify({
+            inputs: `Current meal: ${mealName} (${meal.calories}cal, ${meal.protein}g protein, ${meal.carbs}g carbs, ${meal.fat}g fat). Suggest 3 similar healthy alternatives with brief cooking tips. Keep it concise and practical. Dietary restrictions: ${person.restrictions.length > 0 ? person.restrictions.join(', ') : 'None'}. Please provide meal names and tips.`,
+            parameters: { max_length: 500 }
+          }),
+        }
+      );
+      const result = await response.json();
+
+      if (result[0]?.generated_text) {
+        setAiResponse(result[0].generated_text);
+      } else if (result.error) {
+        setAiResponse(`Error: ${result.error}`);
+      }
+    } catch (e) {
+      setAiResponse(`Error: ${e.message}`);
+    } finally {
+      setLoadingMeal(null);
+    }
   };
 
   const person = mealData[selectedPerson];
@@ -53,9 +98,6 @@ function App() {
     setShowSettings(false);
   };
 
-  const changeMeal = (dayIndex, mealType) => {
-    handleAISuggestions();
-  };
 
   const getTotals = (meals) => meals.reduce((a, m) => ({calories: a.calories + m.calories, protein: a.protein + m.protein, carbs: a.carbs + m.carbs, fat: a.fat + m.fat}), {calories: 0, protein: 0, carbs: 0, fat: 0});
   const totals = getTotals(currentWeekData.days[0].meals);
@@ -91,6 +133,23 @@ function App() {
               <button onClick={saveCalories} className="btn-primary">Save Settings</button>
               <button onClick={() => setShowSettings(false)} className="btn-secondary">Cancel</button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {showApiInput && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>🔑 Hugging Face API Key</h2>
+            <p>Get your free key from <a href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener noreferrer">huggingface.co/settings/tokens</a></p>
+            <input
+              type="password"
+              value={apiKey}
+              onChange={e => setApiKey(e.target.value)}
+              placeholder="hf_..."
+              onKeyPress={e => e.key === 'Enter' && saveApiKey()}
+            />
+            <button onClick={saveApiKey} className="btn-primary">Save API Key</button>
           </div>
         </div>
       )}
@@ -222,8 +281,9 @@ function App() {
                       <button
                         className="btn-change"
                         onClick={() => changeMeal(di, meal.meal)}
+                        disabled={loadingMeal === `${di}-${meal.meal}`}
                       >
-                        ✨ Get AI Suggestions
+                        {loadingMeal === `${di}-${meal.meal}` ? '⏳ Loading...' : '✨ Get AI Suggestions'}
                       </button>
                     </div>
                   ))}
@@ -232,6 +292,16 @@ function App() {
             ))}
           </div>
         </section>
+
+        {/* AI Suggestions */}
+        {aiResponse && (
+          <section className="suggestions-section">
+            <div className="suggestions-card">
+              <h2>🤖 AI Suggestions</h2>
+              <div className="suggestions-text">{aiResponse}</div>
+            </div>
+          </section>
+        )}
 
         {/* Navigation */}
         <div className="navigation">
