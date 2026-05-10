@@ -120,10 +120,6 @@ function App() {
 
   const sendChatMessage = async () => {
     if (!chatInput.trim()) return;
-    if (!apiKey) {
-      setShowApiInput(true);
-      return;
-    }
 
     const userMessage = { text: chatInput, sender: 'user' };
     setChatMessages([...chatMessages, userMessage]);
@@ -139,17 +135,15 @@ function App() {
     const weeklyTotals = getWeeklyTotals();
 
     try {
-      const response = await fetch(
-        'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1',
-        {
-          headers: { Authorization: `Bearer ${apiKey}` },
-          method: 'POST',
-          body: JSON.stringify({
-            inputs: `You are a helpful nutrition assistant. Here's ${person.name}'s meal plan for week ${currentWeek + 1}:\n\n${weekSummary}\n\nWeekly totals: ${weeklyTotals.calories} calories, ${weeklyTotals.protein}g protein, ${weeklyTotals.carbs}g carbs, ${weeklyTotals.fat}g fat.\nDaily target: ${personDailyCalories} calories.\nDietary restrictions: ${person.restrictions.length > 0 ? person.restrictions.join(', ') : 'None'}.\n\nUser question: ${chatInput}\n\nProvide a helpful, concise response about the meal plan.`,
-            parameters: { max_length: 500 }
-          }),
-        }
-      );
+      // Call our secure backend API instead of Hugging Face directly
+      const response = await fetch('/api/ai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          inputs: `You are a helpful nutrition assistant. Here's ${person.name}'s meal plan for week ${currentWeek + 1}:\n\n${weekSummary}\n\nWeekly totals: ${weeklyTotals.calories} calories, ${weeklyTotals.protein}g protein, ${weeklyTotals.carbs}g carbs, ${weeklyTotals.fat}g fat.\nDaily target: ${personDailyCalories} calories.\nDietary restrictions: ${person.restrictions.length > 0 ? person.restrictions.join(', ') : 'None'}.\n\nUser question: ${chatInput}\n\nProvide a helpful, concise response about the meal plan.`,
+          parameters: { max_length: 500 }
+        }),
+      });
       const result = await response.json();
 
       let aiText = 'I encountered an error processing your request. Please try again.';
@@ -197,11 +191,6 @@ function App() {
               />
               <small>Current: {personDailyCalories} calories/day</small>
             </div>
-            <div className="settings-group">
-              <label>AI API Key</label>
-              <button onClick={resetApiKey} className="btn-danger" style={{marginBottom: '10px'}}>Reset API Key</button>
-              <small>Click to clear your saved API key and enter a new one</small>
-            </div>
             <div className="button-group">
               <button onClick={saveCalories} className="btn-primary">Save Settings</button>
               <button onClick={() => setShowSettings(false)} className="btn-secondary">Cancel</button>
@@ -210,22 +199,6 @@ function App() {
         </div>
       )}
 
-      {showApiInput && (
-        <div className="modal-overlay" onClick={() => setShowApiInput(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h2>🔑 Hugging Face API Key</h2>
-            <p>Get your free key from <a href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener noreferrer">huggingface.co/settings/tokens</a></p>
-            <input
-              type="password"
-              value={apiKey}
-              onChange={e => setApiKey(e.target.value)}
-              placeholder="hf_..."
-              onKeyPress={e => e.key === 'Enter' && saveApiKey()}
-            />
-            <button onClick={saveApiKey} className="btn-primary">Save API Key</button>
-          </div>
-        </div>
-      )}
 
       <main className="container">
         {/* User Selection */}
