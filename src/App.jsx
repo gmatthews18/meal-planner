@@ -36,6 +36,13 @@ function App() {
     }
   };
 
+  const resetApiKey = () => {
+    localStorage.removeItem('hf_api_key');
+    setApiKey('');
+    setShowApiInput(true);
+    setChatMessages([]);
+  };
+
   const person = mealData[selectedPerson];
   const currentWeekData = person.weeks[currentWeek];
   const personDailyCalories = dailyCalories[selectedPerson] || person.dailyCalories;
@@ -189,6 +196,11 @@ function App() {
                 step="50"
               />
               <small>Current: {personDailyCalories} calories/day</small>
+            </div>
+            <div className="settings-group">
+              <label>AI API Key</label>
+              <button onClick={resetApiKey} className="btn-danger" style={{marginBottom: '10px'}}>Reset API Key</button>
+              <small>Click to clear your saved API key and enter a new one</small>
             </div>
             <div className="button-group">
               <button onClick={saveCalories} className="btn-primary">Save Settings</button>
