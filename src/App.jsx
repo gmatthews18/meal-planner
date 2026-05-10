@@ -222,9 +222,8 @@ function App() {
                       <button
                         className="btn-change"
                         onClick={() => changeMeal(di, meal.meal)}
-                        disabled={loadingMeal === `${di}-${meal.meal}`}
                       >
-                        {loadingMeal === `${di}-${meal.meal}` ? '⏳ Loading...' : '✨ Get AI Suggestions'}
+                        ✨ Get AI Suggestions
                       </button>
                     </div>
                   ))}
