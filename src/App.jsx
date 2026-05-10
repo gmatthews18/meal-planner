@@ -347,7 +347,7 @@ function App() {
             >
               <span className="emoji">👨</span>
               <span className="name">George</span>
-              <span className="goal">{person.currentWeight}kg → {person.targetWeight}kg</span>
+              <span className="goal">{mealData.george.currentWeight}kg → {mealData.george.targetWeight}kg</span>
             </button>
             <button
               className={`user-btn ${selectedPerson === 'jude' ? 'active' : ''}`}
@@ -355,7 +355,7 @@ function App() {
             >
               <span className="emoji">👦</span>
               <span className="name">Jude</span>
-              <span className="goal">{person.currentWeight}kg → {person.targetWeight}kg</span>
+              <span className="goal">{mealData.jude.currentWeight}kg → {mealData.jude.targetWeight}kg</span>
             </button>
           </div>
         </section>
