@@ -16,7 +16,6 @@ function App() {
   const [shoppingList, setShoppingList] = useState([]);
   const [customRestrictions, setCustomRestrictions] = useState([]);
   const [weightHistory, setWeightHistory] = useState({});
-  const [newWeight, setNewWeight] = useState('');
   const [weightInput, setWeightInput] = useState('');
 
   // Load saved data on mount
@@ -71,7 +70,6 @@ function App() {
     setWeightHistory(updated);
     localStorage.setItem('weight_history', JSON.stringify(updated));
     setWeightInput('');
-    setNewWeight(parseFloat(weightInput));
   };
 
   const getTotals = (meals) => meals.reduce((a, m) => ({
