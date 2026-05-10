@@ -1,53 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import mealData from './mealData.json';
 import './App.css';
 
 function App() {
   const [selectedPerson, setSelectedPerson] = useState('george');
   const [currentWeek, setCurrentWeek] = useState(0);
-  const [apiKey, setApiKey] = useState(localStorage.getItem('grok_api_key') || '');
-  const [showApiInput, setShowApiInput] = useState(!apiKey);
   const [grokResponse, setGrokResponse] = useState('');
   const [loadingMeal, setLoadingMeal] = useState(null);
+  const [meals, setMeals] = useState({});
+  const [dailyCalories, setDailyCalories] = useState({});
+  const [showSettings, setShowSettings] = useState(false);
+  const [editingCalories, setEditingCalories] = useState({});
+
+  // Load saved data on mount
+  useEffect(() => {
+    const savedMeals = localStorage.getItem('saved_meals');
+    const savedCalories = localStorage.getItem('daily_calories');
+    if (savedMeals) setMeals(JSON.parse(savedMeals));
+    if (savedCalories) setDailyCalories(JSON.parse(savedCalories));
+    setEditingCalories({
+      george: savedCalories ? JSON.parse(savedCalories).george || mealData.george.dailyCalories : mealData.george.dailyCalories,
+      jude: savedCalories ? JSON.parse(savedCalories).jude || mealData.jude.dailyCalories : mealData.jude.dailyCalories
+    });
+  }, []);
+
+  const handleAISuggestions = () => {
+    alert('AI suggestions coming soon! Set up your preferred AI service:\n\n• Ollama (local)\n• Hugging Face\n• Together AI\n• Open Router\n\nFor now, you can manually edit meal names and calorie targets.');
+  };
 
   const person = mealData[selectedPerson];
   const currentWeekData = person.weeks[currentWeek];
+  const personDailyCalories = dailyCalories[selectedPerson] || person.dailyCalories;
 
-  const saveApiKey = () => {
-    if (apiKey.trim()) {
-      localStorage.setItem('grok_api_key', apiKey);
-      setShowApiInput(false);
-    }
+  const saveMeals = (updatedMeals) => {
+    setMeals(updatedMeals);
+    localStorage.setItem('saved_meals', JSON.stringify(updatedMeals));
   };
 
-  const changeMeal = async (dayIndex, mealType) => {
-    if (!apiKey) {
-      setShowApiInput(true);
-      return;
-    }
+  const getMealName = (dayIndex, mealType, defaultName) => {
+    const key = `${selectedPerson}-w${currentWeek}-d${dayIndex}-${mealType}`;
+    return meals[key] || defaultName;
+  };
 
-    const day = currentWeekData.days[dayIndex];
-    const meal = day.meals.find(m => m.meal === mealType);
-    setLoadingMeal(`${dayIndex}-${mealType}`);
-    setGrokResponse('');
+  const updateMealName = (dayIndex, mealType, newName) => {
+    const key = `${selectedPerson}-w${currentWeek}-d${dayIndex}-${mealType}`;
+    const updatedMeals = { ...meals, [key]: newName };
+    saveMeals(updatedMeals);
+  };
 
-    try {
-      const res = await fetch('https://api.x.ai/openai/', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey},
-        body: JSON.stringify({
-          model: 'grok-2',
-          messages: [{role: 'user', content: `Current meal: ${meal.name} (${meal.calories}cal, ${meal.protein}g protein, ${meal.carbs}g carbs, ${meal.fat}g fat). Suggest 3 similar alternatives with brief cooking tips. Keep it concise. Dietary restrictions: ${person.restrictions.length > 0 ? person.restrictions.join(', ') : 'None'}`}],
-          max_tokens: 600
-        })
-      });
-      const data = await res.json();
-      setGrokResponse(data.choices[0].message.content);
-    } catch (e) {
-      setGrokResponse(`Error: ${e.message}`);
-    } finally {
-      setLoadingMeal(null);
-    }
+  const saveCalories = () => {
+    const updated = { ...dailyCalories, [selectedPerson]: parseInt(editingCalories[selectedPerson]) };
+    setDailyCalories(updated);
+    localStorage.setItem('daily_calories', JSON.stringify(updated));
+    setShowSettings(false);
+  };
+
+  const changeMeal = (dayIndex, mealType) => {
+    handleAISuggestions();
   };
 
   const getTotals = (meals) => meals.reduce((a, m) => ({calories: a.calories + m.calories, protein: a.protein + m.protein, carbs: a.carbs + m.carbs, fat: a.fat + m.fat}), {calories: 0, protein: 0, carbs: 0, fat: 0});
@@ -61,21 +70,29 @@ function App() {
           <h1>🍽️ AI Meal Planner</h1>
           <p>Personalized 6-week nutrition plan powered by Grok</p>
         </div>
+        <button className="settings-btn" onClick={() => setShowSettings(!showSettings)}>⚙️</button>
       </header>
 
-      {showApiInput && (
+      {showSettings && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h2>🔑 Enter Grok API Key</h2>
-            <p>Get your key from <a href="https://console.x.ai/api" target="_blank" rel="noopener noreferrer">console.x.ai/api</a></p>
-            <input
-              type="password"
-              value={apiKey}
-              onChange={e => setApiKey(e.target.value)}
-              placeholder="xai-..."
-              onKeyPress={e => e.key === 'Enter' && saveApiKey()}
-            />
-            <button onClick={saveApiKey} className="btn-primary">Save API Key</button>
+            <h2>⚙️ Settings</h2>
+            <div className="settings-group">
+              <label>Daily Calorie Target for {selectedPerson === 'george' ? 'George' : 'Jude'}</label>
+              <input
+                type="number"
+                value={editingCalories[selectedPerson] || 0}
+                onChange={e => setEditingCalories({...editingCalories, [selectedPerson]: e.target.value})}
+                min="500"
+                max="5000"
+                step="50"
+              />
+              <small>Current: {personDailyCalories} calories/day</small>
+            </div>
+            <div className="button-group">
+              <button onClick={saveCalories} className="btn-primary">Save Settings</button>
+              <button onClick={() => setShowSettings(false)} className="btn-secondary">Cancel</button>
+            </div>
           </div>
         </div>
       )}
@@ -108,7 +125,7 @@ function App() {
         <section className="stats-section">
           <div className="stat-card">
             <div className="stat-label">Daily Target</div>
-            <div className="stat-value">{person.dailyCalories}</div>
+            <div className="stat-value">{personDailyCalories}</div>
             <div className="stat-unit">calories</div>
           </div>
           <div className="stat-card">
@@ -168,7 +185,22 @@ function App() {
                   {day.meals.map((meal, mi) => (
                     <div key={mi} className="meal-item">
                       <div className="meal-header">
-                        <h4>{meal.name}</h4>
+                        <div className="meal-name-edit">
+                          <h4
+                            className="editable-meal"
+                            contentEditable
+                            onBlur={e => {
+                              const newName = e.currentTarget.textContent.trim();
+                              if (newName && newName !== getMealName(di, meal.meal, meal.name)) {
+                                updateMealName(di, meal.meal, newName);
+                              }
+                            }}
+                            onClick={e => e.currentTarget.focus()}
+                          >
+                            {getMealName(di, meal.meal, meal.name)}
+                          </h4>
+                          <small className="edit-hint">click to edit</small>
+                        </div>
                         <span className="meal-type">{meal.meal.charAt(0).toUpperCase() + meal.meal.slice(1)}</span>
                       </div>
                       <div className="meal-nutrition">
