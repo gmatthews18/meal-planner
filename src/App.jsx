@@ -238,7 +238,6 @@ function App() {
     const avgProtein = Math.round(weeklyTotals.protein / 7);
     const avgCarbs = Math.round(weeklyTotals.carbs / 7);
     const calorieRatio = avgDaily / personDailyCalories;
-    let aiResponse = '';
 
     if (userQuery.includes('calor') || userQuery.includes('energy') || userQuery.includes('intake')) {
       if (calorieRatio < 0.9) {
