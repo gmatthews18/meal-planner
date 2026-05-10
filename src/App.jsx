@@ -82,38 +82,34 @@ function App() {
     return totals;
   };
 
-  const generateShoppingList = () => {
-    const ingredients = {};
-    currentWeekData.days.forEach(day => {
-      day.meals.forEach(meal => {
-        // Skip shared meals if this is not george (to avoid duplication)
-        if (meal.isShared && selectedPerson !== 'george') return;
-
-        meal.ingredients.forEach(ing => {
-          const key = ing.name;
-          if (!ingredients[key]) {
-            ingredients[key] = { quantity: 0, unit: ing.unit };
-          }
-          ingredients[key].quantity += parseFloat(ing.quantity) || 0;
-        });
-      });
-    });
-
-    const list = Object.entries(ingredients).map(([name, data]) => ({
-      name,
-      quantity: data.quantity.toFixed(2),
-      unit: data.unit,
-      checked: false
-    }));
-
-    setShoppingList(list);
-  };
-
   useEffect(() => {
     if (activeTab === 'shopping') {
-      generateShoppingList();
+      const ingredients = {};
+      currentWeekData.days.forEach(day => {
+        day.meals.forEach(meal => {
+          // Skip shared meals if this is not george (to avoid duplication)
+          if (meal.isShared && selectedPerson !== 'george') return;
+
+          meal.ingredients.forEach(ing => {
+            const key = ing.name;
+            if (!ingredients[key]) {
+              ingredients[key] = { quantity: 0, unit: ing.unit };
+            }
+            ingredients[key].quantity += parseFloat(ing.quantity) || 0;
+          });
+        });
+      });
+
+      const list = Object.entries(ingredients).map(([name, data]) => ({
+        name,
+        quantity: data.quantity.toFixed(2),
+        unit: data.unit,
+        checked: false
+      }));
+
+      setShoppingList(list);
     }
-  }, [activeTab, currentWeek, selectedPerson]);
+  }, [activeTab, currentWeek, selectedPerson, currentWeekData]);
 
   const sendChatMessage = async () => {
     if (!chatInput.trim()) return;
