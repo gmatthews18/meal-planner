@@ -1202,6 +1202,95 @@ body {
   transition: width 0.3s ease;
 }
 
+.weight-card {
+  grid-column: 1 / -1;
+}
+
+.weight-input-section {
+  margin-bottom: 20px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 10px 14px;
+  background: var(--bg-primary);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.btn-primary-small {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary-small:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+.btn-primary-small:active {
+  transform: translateY(0);
+}
+
+.weight-history {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.history-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  background: rgba(99, 102, 241, 0.05);
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.history-date {
+  color: var(--text-secondary);
+}
+
+.history-weight {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
 .nutrition-summary p.good {
   color: var(--success);
   font-weight: 600;

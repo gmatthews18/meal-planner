@@ -12,16 +12,21 @@ function App() {
   const [chatMessages, setChatMessages] = useState([]);
   const [chatInput, setChatInput] = useState('');
   const [loadingChat, setLoadingChat] = useState(false);
-  const [activeTab, setActiveTab] = useState('week'); // 'week', 'shopping', 'dashboard'
+  const [activeTab, setActiveTab] = useState('dashboard'); // 'week', 'shopping', 'dashboard'
   const [shoppingList, setShoppingList] = useState([]);
   const [customRestrictions, setCustomRestrictions] = useState([]);
+  const [weightHistory, setWeightHistory] = useState({});
+  const [newWeight, setNewWeight] = useState('');
+  const [weightInput, setWeightInput] = useState('');
 
   // Load saved data on mount
   useEffect(() => {
     const savedMeals = localStorage.getItem('saved_meals');
     const savedCalories = localStorage.getItem('daily_calories');
+    const savedWeights = localStorage.getItem('weight_history');
     if (savedMeals) setMeals(JSON.parse(savedMeals));
     if (savedCalories) setDailyCalories(JSON.parse(savedCalories));
+    if (savedWeights) setWeightHistory(JSON.parse(savedWeights));
     setEditingCalories({
       george: savedCalories ? JSON.parse(savedCalories).george || mealData.george.dailyCalories : mealData.george.dailyCalories,
       jude: savedCalories ? JSON.parse(savedCalories).jude || mealData.jude.dailyCalories : mealData.jude.dailyCalories
@@ -53,6 +58,20 @@ function App() {
     setDailyCalories(updated);
     localStorage.setItem('daily_calories', JSON.stringify(updated));
     setShowSettings(false);
+  };
+
+  const saveWeight = () => {
+    if (!weightInput || isNaN(weightInput)) return;
+    const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    const personKey = selectedPerson;
+    const updated = {
+      ...weightHistory,
+      [personKey]: [...(weightHistory[personKey] || []), { date: today, weight: parseFloat(weightInput) }]
+    };
+    setWeightHistory(updated);
+    localStorage.setItem('weight_history', JSON.stringify(updated));
+    setWeightInput('');
+    setNewWeight(parseFloat(weightInput));
   };
 
   const getTotals = (meals) => meals.reduce((a, m) => ({
@@ -613,18 +632,63 @@ function App() {
           <section className="dashboard-section">
             <h2>📊 Progress Dashboard</h2>
             <div className="dashboard-grid">
-              <div className="dashboard-card">
-                <h3>Weight Progress</h3>
-                <div className="progress-details">
-                  <p>Current: <strong>{person.currentWeight} kg</strong></p>
-                  <p>Target: <strong>{person.targetWeight} kg</strong></p>
-                  <p>To Lose: <strong>{(person.currentWeight - person.targetWeight).toFixed(1)} kg</strong></p>
-                  <div className="weight-bar">
-                    <div className="weight-progress" style={{
-                      width: `${((person.currentWeight - person.targetWeight) / (person.currentWeight - person.targetWeight) * 100)}%`
-                    }}></div>
+              <div className="dashboard-card weight-card">
+                <h3>📈 Weight Progress</h3>
+                <div className="weight-input-section">
+                  <div className="input-group">
+                    <input
+                      type="number"
+                      value={weightInput}
+                      onChange={e => setWeightInput(e.target.value)}
+                      placeholder="Enter weight (kg)"
+                      step="0.1"
+                      min="0"
+                      max="300"
+                    />
+                    <button onClick={saveWeight} className="btn-primary-small">Log Weight</button>
                   </div>
                 </div>
+
+                <div className="progress-details">
+                  {weightHistory[selectedPerson] && weightHistory[selectedPerson].length > 0 ? (
+                    <>
+                      <p>Latest: <strong>{weightHistory[selectedPerson][weightHistory[selectedPerson].length - 1].weight} kg</strong></p>
+                      <p>Started: <strong>{weightHistory[selectedPerson][0].weight} kg</strong></p>
+                      <p>Lost: <strong>{(weightHistory[selectedPerson][0].weight - weightHistory[selectedPerson][weightHistory[selectedPerson].length - 1].weight).toFixed(1)} kg</strong></p>
+                    </>
+                  ) : (
+                    <>
+                      <p>Start: <strong>{person.currentWeight} kg</strong></p>
+                      <p>Latest: <strong>No data yet</strong></p>
+                      <p>Lost: <strong>0 kg</strong></p>
+                    </>
+                  )}
+                  <p>Target: <strong>{person.targetWeight} kg</strong></p>
+
+                  <div className="weight-bar">
+                    {weightHistory[selectedPerson] && weightHistory[selectedPerson].length > 0 ? (
+                      <div className="weight-progress" style={{
+                        width: `${Math.min(((weightHistory[selectedPerson][0].weight - weightHistory[selectedPerson][weightHistory[selectedPerson].length - 1].weight) / (weightHistory[selectedPerson][0].weight - person.targetWeight)) * 100, 100)}%`
+                      }}></div>
+                    ) : (
+                      <div className="weight-progress" style={{ width: '0%' }}></div>
+                    )}
+                  </div>
+                </div>
+
+                {weightHistory[selectedPerson] && weightHistory[selectedPerson].length > 0 && (
+                  <div className="weight-history">
+                    <p className="history-title">Recent Entries</p>
+                    <div className="history-list">
+                      {weightHistory[selectedPerson].slice(-5).reverse().map((entry, idx) => (
+                        <div key={idx} className="history-item">
+                          <span className="history-date">{entry.date}</span>
+                          <span className="history-weight">{entry.weight} kg</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="dashboard-card">
