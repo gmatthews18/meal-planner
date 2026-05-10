@@ -225,7 +225,7 @@ function App() {
     }
 
     // Handle clearing restrictions
-    if (userQuery.includes('reset') || userQuery.includes('clear') && userQuery.includes('restrict')) {
+    if (userQuery.includes('reset') || (userQuery.includes('clear') && userQuery.includes('restrict'))) {
       setCustomRestrictions([]);
       aiResponse = `Restrictions cleared! Back to your default preferences: ${person.restrictions.join(', ') || 'None'}`;
       const aiMessage = { text: aiResponse, sender: 'ai' };
