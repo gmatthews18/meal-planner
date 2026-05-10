@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import mealData from './mealData.json';
 import './App.css';
 
+// Embedded API key for Hugging Face
+const HF_API_KEY = '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';
+
 function App() {
   const [selectedPerson, setSelectedPerson] = useState('george');
   const [currentWeek, setCurrentWeek] = useState(0);
@@ -9,8 +12,6 @@ function App() {
   const [dailyCalories, setDailyCalories] = useState({});
   const [showSettings, setShowSettings] = useState(false);
   const [editingCalories, setEditingCalories] = useState({});
-  const [apiKey, setApiKey] = useState(localStorage.getItem('hf_api_key') || '');
-  const [showApiInput, setShowApiInput] = useState(!apiKey);
   const [chatMessages, setChatMessages] = useState([]);
   const [chatInput, setChatInput] = useState('');
   const [loadingChat, setLoadingChat] = useState(false);
@@ -29,19 +30,6 @@ function App() {
     });
   }, []);
 
-  const saveApiKey = () => {
-    if (apiKey.trim()) {
-      localStorage.setItem('hf_api_key', apiKey);
-      setShowApiInput(false);
-    }
-  };
-
-  const resetApiKey = () => {
-    localStorage.removeItem('hf_api_key');
-    setApiKey('');
-    setShowApiInput(true);
-    setChatMessages([]);
-  };
 
   const person = mealData[selectedPerson];
   const currentWeekData = person.weeks[currentWeek];
@@ -135,15 +123,21 @@ function App() {
     const weeklyTotals = getWeeklyTotals();
 
     try {
-      // Call our secure backend API instead of Hugging Face directly
-      const response = await fetch('/api/ai', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          inputs: `You are a helpful nutrition assistant. Here's ${person.name}'s meal plan for week ${currentWeek + 1}:\n\n${weekSummary}\n\nWeekly totals: ${weeklyTotals.calories} calories, ${weeklyTotals.protein}g protein, ${weeklyTotals.carbs}g carbs, ${weeklyTotals.fat}g fat.\nDaily target: ${personDailyCalories} calories.\nDietary restrictions: ${person.restrictions.length > 0 ? person.restrictions.join(', ') : 'None'}.\n\nUser question: ${chatInput}\n\nProvide a helpful, concise response about the meal plan.`,
-          parameters: { max_length: 500 }
-        }),
-      });
+      // Call Hugging Face API directly
+      const response = await fetch(
+        'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${HF_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            inputs: `You are a helpful nutrition assistant. Here's ${person.name}'s meal plan for week ${currentWeek + 1}:\n\n${weekSummary}\n\nWeekly totals: ${weeklyTotals.calories} calories, ${weeklyTotals.protein}g protein, ${weeklyTotals.carbs}g carbs, ${weeklyTotals.fat}g fat.\nDaily target: ${personDailyCalories} calories.\nDietary restrictions: ${person.restrictions.length > 0 ? person.restrictions.join(', ') : 'None'}.\n\nUser question: ${chatInput}\n\nProvide a helpful, concise response about the meal plan.`,
+            parameters: { max_length: 500 }
+          }),
+        }
+      );
       const result = await response.json();
 
       let aiText = 'I encountered an error processing your request. Please try again.';
