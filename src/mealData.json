@@ -488,20 +488,21 @@
             "day": "Tuesday",
             "meals": [
               {
-                "name": "Greek Yogurt with Granola & Berries",
+                "name": "Fried Egg with Whole Wheat Toast & Berries",
                 "meal": "breakfast",
-                "calories": 370,
-                "protein": 18,
-                "carbs": 48,
-                "fat": 6,
-                "prepTime": 5,
+                "calories": 320,
+                "protein": 14,
+                "carbs": 38,
+                "fat": 10,
+                "prepTime": 8,
                 "ingredients": [
-                  { "name": "greek yogurt", "quantity": "180", "unit": "g" },
-                  { "name": "granola", "quantity": "35", "unit": "g" },
+                  { "name": "eggs", "quantity": "1", "unit": "piece" },
+                  { "name": "whole wheat bread", "quantity": "1", "unit": "slice" },
                   { "name": "blueberries", "quantity": "0.75", "unit": "cup" },
-                  { "name": "honey", "quantity": "1.5", "unit": "tsp" }
+                  { "name": "butter", "quantity": "0.5", "unit": "tbsp" },
+                  { "name": "honey", "quantity": "0.5", "unit": "tsp" }
                 ],
-                "instructions": ["Layer yogurt in bowl", "Add granola and berries", "Drizzle with honey"]
+                "instructions": ["Heat butter in pan", "Fry egg until desired doneness", "Toast bread", "Serve egg on toast with berries and honey drizzle"]
               },
               {
                 "name": "Turkey & Avocado Wrap",
@@ -544,22 +545,21 @@
             "day": "Wednesday",
             "meals": [
               {
-                "name": "Smoothie Bowl with Granola & Coconut",
+                "name": "Scrambled Egg with Whole Wheat Toast & Tomato",
                 "meal": "breakfast",
-                "calories": 390,
-                "protein": 16,
-                "carbs": 54,
-                "fat": 8,
+                "calories": 320,
+                "protein": 13,
+                "carbs": 36,
+                "fat": 11,
                 "prepTime": 8,
                 "ingredients": [
-                  { "name": "frozen banana", "quantity": "1", "unit": "piece" },
-                  { "name": "mixed berries", "quantity": "0.75", "unit": "cup" },
-                  { "name": "almond milk", "quantity": "0.5", "unit": "cup" },
-                  { "name": "protein powder", "quantity": "20", "unit": "g" },
-                  { "name": "granola", "quantity": "30", "unit": "g" },
-                  { "name": "shredded coconut", "quantity": "10", "unit": "g" }
+                  { "name": "eggs", "quantity": "1", "unit": "piece" },
+                  { "name": "whole wheat bread", "quantity": "1", "unit": "slice" },
+                  { "name": "tomato", "quantity": "0.75", "unit": "piece" },
+                  { "name": "butter", "quantity": "0.5", "unit": "tbsp" },
+                  { "name": "black pepper", "quantity": "0.25", "unit": "tsp" }
                 ],
-                "instructions": ["Blend banana, berries, milk, and protein", "Pour into bowl", "Top with granola and coconut"]
+                "instructions": ["Heat butter in pan", "Scramble egg until cooked", "Toast bread", "Slice tomato and serve alongside toast and egg"]
               },
               {
                 "name": "Tuna Salad with Whole Wheat Pita",
@@ -721,22 +721,21 @@
             "day": "Saturday",
             "meals": [
               {
-                "name": "Pancakes with Maple Syrup & Berries",
+                "name": "Fried Egg with Whole Wheat Toast & Berries",
                 "meal": "breakfast",
-                "calories": 420,
+                "calories": 340,
                 "protein": 14,
-                "carbs": 58,
-                "fat": 10,
-                "prepTime": 15,
+                "carbs": 38,
+                "fat": 12,
+                "prepTime": 8,
                 "ingredients": [
-                  { "name": "oat flour", "quantity": "1", "unit": "cup" },
-                  { "name": "banana", "quantity": "1", "unit": "piece" },
-                  { "name": "almond milk", "quantity": "0.75", "unit": "cup" },
-                  { "name": "blueberries", "quantity": "0.75", "unit": "cup" },
-                  { "name": "maple syrup", "quantity": "2", "unit": "tbsp" },
-                  { "name": "butter", "quantity": "0.5", "unit": "tbsp" }
+                  { "name": "eggs", "quantity": "1", "unit": "piece" },
+                  { "name": "whole wheat bread", "quantity": "1", "unit": "slice" },
+                  { "name": "mixed berries", "quantity": "1", "unit": "cup" },
+                  { "name": "butter", "quantity": "0.5", "unit": "tbsp" },
+                  { "name": "honey", "quantity": "1", "unit": "tsp" }
                 ],
-                "instructions": ["Mix flour, mashed banana, and milk", "Cook pancakes on buttered griddle", "Top with berries and syrup"]
+                "instructions": ["Heat butter in pan", "Fry egg until desired doneness", "Toast bread", "Serve egg on toast with fresh berries and light honey drizzle"]
               },
               {
                 "name": "Chicken & Vegetable Soup",
@@ -780,22 +779,21 @@
             "day": "Sunday",
             "meals": [
               {
-                "name": "Breakfast Burrito with Beans & Vegetables",
+                "name": "Scrambled Egg with Whole Wheat Toast & Cheese",
                 "meal": "breakfast",
-                "calories": 430,
-                "protein": 18,
-                "carbs": 54,
+                "calories": 320,
+                "protein": 14,
+                "carbs": 36,
                 "fat": 12,
-                "prepTime": 12,
+                "prepTime": 8,
                 "ingredients": [
-                  { "name": "whole wheat tortilla", "quantity": "1", "unit": "piece" },
-                  { "name": "black beans", "quantity": "0.75", "unit": "cup" },
-                  { "name": "bell peppers", "quantity": "100", "unit": "g" },
-                  { "name": "shredded cheese", "quantity": "25", "unit": "g" },
                   { "name": "eggs", "quantity": "1", "unit": "piece" },
-                  { "name": "salsa", "quantity": "3", "unit": "tbsp" }
+                  { "name": "whole wheat bread", "quantity": "1", "unit": "slice" },
+                  { "name": "shredded cheese", "quantity": "20", "unit": "g" },
+                  { "name": "butter", "quantity": "0.5", "unit": "tbsp" },
+                  { "name": "chives", "quantity": "5", "unit": "g" }
                 ],
-                "instructions": ["Warm tortilla", "Heat beans", "Scramble egg", "Sauté peppers", "Assemble burrito"]
+                "instructions": ["Heat butter in pan", "Scramble egg with chives", "Toast bread", "Top toast with scrambled egg and cheese"]
               },
               {
                 "name": "Mediterranean Chickpea Salad",
