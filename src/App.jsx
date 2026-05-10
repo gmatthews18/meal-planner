@@ -143,21 +143,24 @@ function App() {
     }
 
     try {
-      // Call Hugging Face API directly
-      const response = await fetch(
-        'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1',
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            inputs: `You are a helpful nutrition assistant. Here's ${person.name}'s meal plan for week ${currentWeek + 1}:\n\n${weekSummary}\n\nWeekly totals: ${weeklyTotals.calories} calories, ${weeklyTotals.protein}g protein, ${weeklyTotals.carbs}g carbs, ${weeklyTotals.fat}g fat.\nDaily target: ${personDailyCalories} calories.\nDietary restrictions: ${person.restrictions.length > 0 ? person.restrictions.join(', ') : 'None'}.\n\nUser question: ${chatInput}\n\nProvide a helpful, concise response about the meal plan.`,
-            parameters: { max_length: 500 }
-          }),
-        }
-      );
+      const prompt = `You are a helpful nutrition assistant. Here's ${person.name}'s meal plan for week ${currentWeek + 1}:\n\n${weekSummary}\n\nWeekly totals: ${weeklyTotals.calories} calories, ${weeklyTotals.protein}g protein, ${weeklyTotals.carbs}g carbs, ${weeklyTotals.fat}g fat.\nDaily target: ${personDailyCalories} calories.\nDietary restrictions: ${person.restrictions.length > 0 ? person.restrictions.join(', ') : 'None'}.\n\nUser question: ${chatInput}\n\nProvide a helpful, concise response about the meal plan.`;
+
+      // Call Vercel API endpoint
+      const apiUrl = process.env.NODE_ENV === 'production'
+        ? '/api/ai'
+        : 'http://localhost:3001/api/ai';
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt,
+          apiKey
+        }),
+      });
+
       const result = await response.json();
 
       let aiText = 'I encountered an error processing your request. Please try again.';
