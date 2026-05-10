@@ -134,7 +134,6 @@ function App() {
 
     // Macro balance advice
     const carbPercent = (avgDailyCarbs * 4) / avgDailyCalories * 100;
-    const fatPercent = (avgDailyFat * 9) / avgDailyCalories * 100;
     if (carbPercent > 60) {
       responses.push(`Your carb ratio is ${Math.round(carbPercent)}%, which is on the higher side. You might consider swapping some refined carbs for whole grains.`);
     }
@@ -178,7 +177,6 @@ function App() {
         aiResponse = `You don't have any dietary restrictions set. ${generateNutritionAdvice()}`;
       }
     } else if (userQuery.includes('recommend') || userQuery.includes('suggest')) {
-      const weeklyTotals = getWeeklyTotals();
       aiResponse = `Here are my recommendations: ${generateNutritionAdvice()} Try mixing up your meals to keep things interesting while staying within your nutritional targets!`;
     } else {
       aiResponse = `Here's your nutrition analysis: ${generateNutritionAdvice()} Feel free to ask me about calories, protein, macros, or your dietary restrictions!`;
