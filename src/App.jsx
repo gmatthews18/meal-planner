@@ -157,28 +157,53 @@ function App() {
     await new Promise(resolve => setTimeout(resolve, 500));
 
     const userQuery = chatInput.toLowerCase();
+    const weeklyTotals = getWeeklyTotals();
+    const avgDaily = Math.round(weeklyTotals.calories / 7);
+    const avgProtein = Math.round(weeklyTotals.protein / 7);
+    const avgCarbs = Math.round(weeklyTotals.carbs / 7);
+    const calorieRatio = avgDaily / personDailyCalories;
     let aiResponse = '';
 
-    if (userQuery.includes('calor') || userQuery.includes('energy')) {
-      const weeklyTotals = getWeeklyTotals();
-      const avgDaily = weeklyTotals.calories / 7;
-      aiResponse = `Your meal plan for this week averages ${Math.round(avgDaily)} calories per day against a target of ${personDailyCalories}. ${generateNutritionAdvice()}`;
+    if (userQuery.includes('calor') || userQuery.includes('energy') || userQuery.includes('intake')) {
+      if (calorieRatio < 0.9) {
+        aiResponse = `You're averaging ${avgDaily} calories/day, which is ${Math.round((1 - calorieRatio) * 100)}% below your ${personDailyCalories} target. Try adding more snacks or increasing portion sizes.`;
+      } else if (calorieRatio > 1.1) {
+        aiResponse = `You're averaging ${avgDaily} calories/day, which is ${Math.round((calorieRatio - 1) * 100)}% above your ${personDailyCalories} target. Consider smaller portions or lower-calorie alternatives.`;
+      } else {
+        aiResponse = `Perfect! You're averaging ${avgDaily} calories/day, right on target with your ${personDailyCalories} calorie goal.`;
+      }
     } else if (userQuery.includes('protein')) {
-      const weeklyTotals = getWeeklyTotals();
-      const avgProtein = weeklyTotals.protein / 7;
-      aiResponse = `Your protein intake averages ${Math.round(avgProtein)}g per day. ${generateNutritionAdvice()}`;
+      const proteinTarget = Math.round(personDailyCalories * 0.3 / 4);
+      if (avgProtein < proteinTarget * 0.9) {
+        aiResponse = `Your protein is ${avgProtein}g/day, a bit low. Aim for ~${proteinTarget}g by adding chicken, fish, eggs, or legumes.`;
+      } else if (avgProtein > proteinTarget * 1.2) {
+        aiResponse = `Great protein intake at ${avgProtein}g/day! That's excellent for muscle recovery and satiety.`;
+      } else {
+        aiResponse = `Your protein at ${avgProtein}g/day is well-balanced for your goals.`;
+      }
+    } else if (userQuery.includes('carb')) {
+      const carbPercent = Math.round((avgCarbs * 4) / avgDaily * 100);
+      if (carbPercent > 60) {
+        aiResponse = `Your carbs are ${carbPercent}% of calories, which is higher. Try swapping some refined carbs for whole grains or vegetables.`;
+      } else if (carbPercent < 40) {
+        aiResponse = `Your carbs are ${carbPercent}% of calories, which is lower. Carbs are important for energy—consider adding more fruits or grains.`;
+      } else {
+        aiResponse = `Your carb ratio at ${carbPercent}% is well-balanced for energy and performance.`;
+      }
     } else if (userQuery.includes('macro') || userQuery.includes('balance')) {
-      aiResponse = generateNutritionAdvice();
+      aiResponse = `Your macros: ${avgDaily}cal, ${avgProtein}g protein, ${avgCarbs}g carbs. ${generateNutritionAdvice()}`;
     } else if (userQuery.includes('restrict') || userQuery.includes('allerg')) {
       if (person.restrictions.length > 0) {
-        aiResponse = `Your dietary restrictions are: ${person.restrictions.join(', ')}. Your meal plan is designed to accommodate these restrictions. ${generateNutritionAdvice()}`;
+        aiResponse = `Your restrictions: ${person.restrictions.join(', ')}. Your meal plan fully accounts for these.`;
       } else {
-        aiResponse = `You don't have any dietary restrictions set. ${generateNutritionAdvice()}`;
+        aiResponse = `You don't have any dietary restrictions set up.`;
       }
-    } else if (userQuery.includes('recommend') || userQuery.includes('suggest')) {
-      aiResponse = `Here are my recommendations: ${generateNutritionAdvice()} Try mixing up your meals to keep things interesting while staying within your nutritional targets!`;
+    } else if (userQuery.includes('meal') || userQuery.includes('recipe')) {
+      aiResponse = `I can see your meals for week ${currentWeek + 1}. Your average daily intake is ${avgDaily} calories with ${avgProtein}g protein. What would you like to know about specific meals?`;
+    } else if (userQuery.includes('recommend') || userQuery.includes('suggest') || userQuery.includes('help')) {
+      aiResponse = `Try asking about: calories, protein, carbs, macros, restrictions, or your meals. Your current average: ${avgDaily}cal/day, target: ${personDailyCalories}cal.`;
     } else {
-      aiResponse = `Here's your nutrition analysis: ${generateNutritionAdvice()} Feel free to ask me about calories, protein, macros, or your dietary restrictions!`;
+      aiResponse = `I can help with your meal planning! Current stats: ${avgDaily}cal/day (target: ${personDailyCalories}), ${avgProtein}g protein. What would you like to know?`;
     }
 
     const aiMessage = { text: aiResponse, sender: 'ai' };
