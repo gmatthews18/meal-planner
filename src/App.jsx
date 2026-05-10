@@ -5,8 +5,6 @@ import './App.css';
 function App() {
   const [selectedPerson, setSelectedPerson] = useState('george');
   const [currentWeek, setCurrentWeek] = useState(0);
-  const [grokResponse, setGrokResponse] = useState('');
-  const [loadingMeal, setLoadingMeal] = useState(null);
   const [meals, setMeals] = useState({});
   const [dailyCalories, setDailyCalories] = useState({});
   const [showSettings, setShowSettings] = useState(false);
@@ -235,16 +233,6 @@ function App() {
             ))}
           </div>
         </section>
-
-        {/* AI Suggestions */}
-        {grokResponse && (
-          <section className="suggestions-section">
-            <div className="suggestions-card">
-              <h2>🤖 AI Suggestions</h2>
-              <div className="suggestions-text">{grokResponse}</div>
-            </div>
-          </section>
-        )}
 
         {/* Navigation */}
         <div className="navigation">
