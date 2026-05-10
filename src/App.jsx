@@ -102,6 +102,43 @@ function App() {
     }
   }, [activeTab, currentWeek, selectedPerson, currentWeekData]);
 
+  const mealSuggestions = {
+    breakfast: [
+      { name: 'Greek Yogurt & Granola', calories: 300, protein: 15, carbs: 40, fat: 8, safe: true },
+      { name: 'Banana & Peanut Butter Toast', calories: 280, protein: 10, carbs: 35, fat: 9, safe: true },
+      { name: 'Smoothie Bowl with Granola', calories: 320, protein: 12, carbs: 45, fat: 8, safe: true },
+      { name: 'Cottage Cheese & Fruit', calories: 250, protein: 20, carbs: 30, fat: 5, safe: true },
+      { name: 'Avocado Toast with Tomato', calories: 290, protein: 8, carbs: 32, fat: 12, safe: true },
+    ],
+    lunch: [
+      { name: 'Grilled Salmon & Broccoli', calories: 420, protein: 40, carbs: 35, fat: 12, safe: true },
+      { name: 'Turkey & Veggie Sandwich', calories: 380, protein: 28, carbs: 45, fat: 10, safe: true },
+      { name: 'Quinoa Buddha Bowl', calories: 420, protein: 15, carbs: 55, fat: 10, safe: true },
+      { name: 'Lean Beef Taco Bowl', calories: 450, protein: 35, carbs: 40, fat: 12, safe: true },
+      { name: 'Chickpea Curry with Rice', calories: 420, protein: 12, carbs: 60, fat: 10, safe: true },
+    ],
+    dinner: [
+      { name: 'Baked Chicken Breast & Sweet Potato', calories: 480, protein: 45, carbs: 50, fat: 8, safe: true },
+      { name: 'Pasta Primavera with Chicken', calories: 500, protein: 38, carbs: 55, fat: 10, safe: true },
+      { name: 'Grilled Tilapia & Green Beans', calories: 380, protein: 42, carbs: 30, fat: 10, safe: true },
+      { name: 'Vegetable Stir-fry with Tofu', calories: 350, protein: 20, carbs: 40, fat: 12, safe: true },
+      { name: 'Slow-cooker Chili', calories: 420, protein: 28, carbs: 45, fat: 10, safe: true },
+    ],
+    snack: [
+      { name: 'Almonds (1oz)', calories: 160, protein: 6, carbs: 6, fat: 14, safe: true },
+      { name: 'Apple & Almond Butter', calories: 200, protein: 7, carbs: 25, fat: 8, safe: true },
+      { name: 'Protein Bar', calories: 180, protein: 15, carbs: 20, fat: 5, safe: true },
+      { name: 'Yogurt & Berries', calories: 150, protein: 12, carbs: 20, fat: 2, safe: true },
+      { name: 'Hummus & Veggie Sticks', calories: 140, protein: 5, carbs: 15, fat: 6, safe: true },
+    ],
+  };
+
+  const getSuggestedMeal = (mealType) => {
+    const meals = mealSuggestions[mealType] || [];
+    const safeMeals = meals.filter(m => m.safe);
+    return safeMeals[Math.floor(Math.random() * safeMeals.length)];
+  };
+
   const generateNutritionAdvice = () => {
     const weeklyTotals = getWeeklyTotals();
     const avgDailyCalories = weeklyTotals.calories / 7;
@@ -198,10 +235,23 @@ function App() {
       } else {
         aiResponse = `You don't have any dietary restrictions set up.`;
       }
-    } else if (userQuery.includes('meal') || userQuery.includes('recipe')) {
-      aiResponse = `I can see your meals for week ${currentWeek + 1}. Your average daily intake is ${avgDaily} calories with ${avgProtein}g protein. What would you like to know about specific meals?`;
+    } else if (userQuery.includes('new meal') || userQuery.includes('change meal') || userQuery.includes('swap meal')) {
+      const mealTypes = ['breakfast', 'lunch', 'dinner', 'snack'];
+      const suggestions = mealTypes.map(type => {
+        const meal = getSuggestedMeal(type);
+        return `${type.charAt(0).toUpperCase() + type.slice(1)}: ${meal.name} (${meal.calories}cal)`;
+      });
+      aiResponse = `Here are some meal ideas:\n${suggestions.join('\n')}\n\nLet me know which meals you'd like to try, and I can help update your plan!`;
+    } else if (userQuery.includes('breakfast') || userQuery.includes('lunch') || userQuery.includes('dinner') || userQuery.includes('snack')) {
+      let mealType = 'breakfast';
+      if (userQuery.includes('lunch')) mealType = 'lunch';
+      if (userQuery.includes('dinner')) mealType = 'dinner';
+      if (userQuery.includes('snack')) mealType = 'snack';
+
+      const meal = getSuggestedMeal(mealType);
+      aiResponse = `For ${mealType}, I suggest: **${meal.name}**\n${meal.calories}cal, ${meal.protein}g protein, ${meal.carbs}g carbs. Would you like to swap this in?`;
     } else if (userQuery.includes('recommend') || userQuery.includes('suggest') || userQuery.includes('help')) {
-      aiResponse = `Try asking about: calories, protein, carbs, macros, restrictions, or your meals. Your current average: ${avgDaily}cal/day, target: ${personDailyCalories}cal.`;
+      aiResponse = `Try asking about: calories, protein, carbs, macros, restrictions, meals. Or ask for "new meal ideas"! Your current average: ${avgDaily}cal/day, target: ${personDailyCalories}cal.`;
     } else {
       aiResponse = `I can help with your meal planning! Current stats: ${avgDaily}cal/day (target: ${personDailyCalories}), ${avgProtein}g protein. What would you like to know?`;
     }
