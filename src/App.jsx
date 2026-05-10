@@ -564,29 +564,45 @@ function App() {
         {/* Shopping List Tab */}
         {activeTab === 'shopping' && (
           <section className="shopping-section">
-            <h2>🛒 Shopping List - Week {currentWeek + 1}</h2>
+            <div className="shopping-header">
+              <h2>🛒 Shopping List - Week {currentWeek + 1}</h2>
+              <div className="shopping-stats">
+                <span className="stat">{shoppingList.filter(i => i.checked).length}/{shoppingList.length} items</span>
+              </div>
+            </div>
             <div className="shopping-list">
               {shoppingList.length > 0 ? (
-                <ul>
+                <div className="shopping-items-grid">
                   {shoppingList.map((item, idx) => (
-                    <li key={idx} className="shopping-item">
-                      <input
-                        type="checkbox"
-                        checked={item.checked}
-                        onChange={() => {
-                          const updated = [...shoppingList];
-                          updated[idx].checked = !updated[idx].checked;
-                          setShoppingList(updated);
-                        }}
-                      />
-                      <span className={item.checked ? 'checked' : ''}>
-                        {item.quantity} {item.unit} {item.name}
-                      </span>
-                    </li>
+                    <div key={idx} className={`shopping-item-card ${item.checked ? 'checked' : ''}`}>
+                      <div className="item-checkbox">
+                        <input
+                          type="checkbox"
+                          id={`item-${idx}`}
+                          checked={item.checked}
+                          onChange={() => {
+                            const updated = [...shoppingList];
+                            updated[idx].checked = !updated[idx].checked;
+                            setShoppingList(updated);
+                          }}
+                        />
+                        <label htmlFor={`item-${idx}`}></label>
+                      </div>
+                      <div className="item-details">
+                        <div className="item-name">{item.name}</div>
+                        <div className="item-quantity">
+                          <span className="quantity-value">{parseFloat(item.quantity)}</span>
+                          <span className="quantity-unit">{item.unit}</span>
+                        </div>
+                      </div>
+                    </div>
                   ))}
-                </ul>
+                </div>
               ) : (
-                <p>No items in shopping list</p>
+                <div className="empty-state">
+                  <p>📋 No items in shopping list</p>
+                  <small>Select a week to view ingredients</small>
+                </div>
               )}
             </div>
           </section>

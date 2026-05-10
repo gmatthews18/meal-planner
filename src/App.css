@@ -988,10 +988,30 @@ body {
   margin-bottom: 50px;
 }
 
-.shopping-section h2 {
-  font-size: 1.5rem;
+.shopping-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 25px;
+}
+
+.shopping-header h2 {
+  font-size: 1.5rem;
   color: var(--text-primary);
+}
+
+.shopping-stats {
+  display: flex;
+  gap: 15px;
+}
+
+.shopping-stats .stat {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .shopping-list {
@@ -1001,39 +1021,106 @@ body {
   padding: 25px;
 }
 
-.shopping-list ul {
-  list-style: none;
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
 }
 
-.shopping-item {
-  display: flex;
-  align-items: center;
+.empty-state p {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.empty-state small {
+  font-size: 0.9rem;
+}
+
+.shopping-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 15px;
-  padding: 12px;
-  border-radius: 10px;
+}
+
+.shopping-item-card {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(99, 102, 241, 0.05) 100%);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
   transition: all 0.3s ease;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  cursor: pointer;
 }
 
-.shopping-item:hover {
-  background: rgba(99, 102, 241, 0.05);
+.shopping-item-card:hover {
+  border-color: var(--primary-light);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px);
 }
 
-.shopping-item input[type="checkbox"] {
+.shopping-item-card.checked {
+  border-color: var(--success);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+}
+
+.item-checkbox {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.item-checkbox input[type="checkbox"] {
   width: 20px;
   height: 20px;
   cursor: pointer;
   accent-color: var(--primary);
 }
 
-.shopping-item span {
-  flex: 1;
-  color: var(--text-primary);
-  font-size: 1rem;
+.item-checkbox label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
-.shopping-item span.checked {
+.item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-name {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  word-break: break-word;
+  margin-bottom: 8px;
+}
+
+.shopping-item-card.checked .item-name {
   text-decoration: line-through;
   color: var(--text-secondary);
+}
+
+.item-quantity {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.quantity-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary-light);
+}
+
+.quantity-unit {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
 /* Dashboard Section */
