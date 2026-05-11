@@ -18,7 +18,6 @@ function App() {
   const [weightHistory, setWeightHistory] = useState({});
   const [weightInput, setWeightInput] = useState('');
   const [eatenCalories, setEatenCalories] = useState({});
-  const [dailyCalorieInput, setDailyCalorieInput] = useState('');
 
   // Load saved data on mount
   useEffect(() => {
@@ -88,19 +87,6 @@ function App() {
   const formatWeight = (kg) => {
     const { stones, pounds } = kgToStonePounds(kg);
     return `${kg}kg (${stones}st ${pounds}lb)`;
-  };
-
-  // Log daily calories eaten
-  const logDailyCalories = (day) => {
-    if (!dailyCalorieInput || isNaN(dailyCalorieInput)) return;
-    const key = `${selectedPerson}-w${currentWeek}-d${day}`;
-    const updated = {
-      ...eatenCalories,
-      [key]: parseFloat(dailyCalorieInput)
-    };
-    setEatenCalories(updated);
-    localStorage.setItem('eaten_calories', JSON.stringify(updated));
-    setDailyCalorieInput('');
   };
 
   // Get calories eaten for a specific day
