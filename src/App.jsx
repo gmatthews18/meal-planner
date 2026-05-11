@@ -17,15 +17,19 @@ function App() {
   const [customRestrictions, setCustomRestrictions] = useState([]);
   const [weightHistory, setWeightHistory] = useState({});
   const [weightInput, setWeightInput] = useState('');
+  const [eatenCalories, setEatenCalories] = useState({});
+  const [dailyCalorieInput, setDailyCalorieInput] = useState('');
 
   // Load saved data on mount
   useEffect(() => {
     const savedMeals = localStorage.getItem('saved_meals');
     const savedCalories = localStorage.getItem('daily_calories');
     const savedWeights = localStorage.getItem('weight_history');
+    const savedEatenCalories = localStorage.getItem('eaten_calories');
     if (savedMeals) setMeals(JSON.parse(savedMeals));
     if (savedCalories) setDailyCalories(JSON.parse(savedCalories));
     if (savedWeights) setWeightHistory(JSON.parse(savedWeights));
+    if (savedEatenCalories) setEatenCalories(JSON.parse(savedEatenCalories));
     setEditingCalories({
       george: savedCalories ? JSON.parse(savedCalories).george || mealData.george.dailyCalories : mealData.george.dailyCalories,
       jude: savedCalories ? JSON.parse(savedCalories).jude || mealData.jude.dailyCalories : mealData.jude.dailyCalories
@@ -70,6 +74,48 @@ function App() {
     setWeightHistory(updated);
     localStorage.setItem('weight_history', JSON.stringify(updated));
     setWeightInput('');
+  };
+
+  // Convert kg to stones and pounds
+  const kgToStonePounds = (kg) => {
+    const totalPounds = kg * 2.20462;
+    const stones = Math.floor(totalPounds / 14);
+    const pounds = Math.round(totalPounds % 14);
+    return { stones, pounds };
+  };
+
+  // Format weight display
+  const formatWeight = (kg) => {
+    const { stones, pounds } = kgToStonePounds(kg);
+    return `${kg}kg (${stones}st ${pounds}lb)`;
+  };
+
+  // Log daily calories eaten
+  const logDailyCalories = (day) => {
+    if (!dailyCalorieInput || isNaN(dailyCalorieInput)) return;
+    const key = `${selectedPerson}-w${currentWeek}-d${day}`;
+    const updated = {
+      ...eatenCalories,
+      [key]: parseFloat(dailyCalorieInput)
+    };
+    setEatenCalories(updated);
+    localStorage.setItem('eaten_calories', JSON.stringify(updated));
+    setDailyCalorieInput('');
+  };
+
+  // Get calories eaten for a specific day
+  const getEatenCaloriesForDay = (day) => {
+    const key = `${selectedPerson}-w${currentWeek}-d${day}`;
+    return eatenCalories[key] || 0;
+  };
+
+  // Get total eaten calories for the week
+  const getTotalEatenCaloriesForWeek = () => {
+    let total = 0;
+    currentWeekData.days.forEach((day, idx) => {
+      total += getEatenCaloriesForDay(idx);
+    });
+    return total;
   };
 
   const getTotals = (meals) => meals.reduce((a, m) => ({
@@ -364,7 +410,7 @@ function App() {
             >
               <span className="emoji">👨</span>
               <span className="name">George</span>
-              <span className="goal">{mealData.george.currentWeight}kg → {mealData.george.targetWeight}kg</span>
+              <span className="goal">{formatWeight(mealData.george.currentWeight)} → {formatWeight(mealData.george.targetWeight)}</span>
             </button>
             <button
               className={`user-btn ${selectedPerson === 'jude' ? 'active' : ''}`}
@@ -372,7 +418,7 @@ function App() {
             >
               <span className="emoji">👦</span>
               <span className="name">Jude</span>
-              <span className="goal">{mealData.jude.currentWeight}kg → {mealData.jude.targetWeight}kg</span>
+              <span className="goal">{formatWeight(mealData.jude.currentWeight)} → {formatWeight(mealData.jude.targetWeight)}</span>
             </button>
           </div>
         </section>
@@ -650,18 +696,18 @@ function App() {
                 <div className="progress-details">
                   {weightHistory[selectedPerson] && weightHistory[selectedPerson].length > 0 ? (
                     <>
-                      <p>Latest: <strong>{weightHistory[selectedPerson][weightHistory[selectedPerson].length - 1].weight} kg</strong></p>
-                      <p>Started: <strong>{weightHistory[selectedPerson][0].weight} kg</strong></p>
+                      <p>Latest: <strong>{formatWeight(weightHistory[selectedPerson][weightHistory[selectedPerson].length - 1].weight)}</strong></p>
+                      <p>Started: <strong>{formatWeight(weightHistory[selectedPerson][0].weight)}</strong></p>
                       <p>Lost: <strong>{(weightHistory[selectedPerson][0].weight - weightHistory[selectedPerson][weightHistory[selectedPerson].length - 1].weight).toFixed(1)} kg</strong></p>
                     </>
                   ) : (
                     <>
-                      <p>Start: <strong>{person.currentWeight} kg</strong></p>
+                      <p>Start: <strong>{formatWeight(person.currentWeight)}</strong></p>
                       <p>Latest: <strong>No data yet</strong></p>
                       <p>Lost: <strong>0 kg</strong></p>
                     </>
                   )}
-                  <p>Target: <strong>{person.targetWeight} kg</strong></p>
+                  <p>Target: <strong>{formatWeight(person.targetWeight)}</strong></p>
 
                   <div className="weight-bar">
                     {weightHistory[selectedPerson] && weightHistory[selectedPerson].length > 0 ? (
@@ -681,12 +727,61 @@ function App() {
                       {weightHistory[selectedPerson].slice(-5).reverse().map((entry, idx) => (
                         <div key={idx} className="history-item">
                           <span className="history-date">{entry.date}</span>
-                          <span className="history-weight">{entry.weight} kg</span>
+                          <span className="history-weight">{formatWeight(entry.weight)}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                 )}
+              </div>
+
+              <div className="dashboard-card daily-calories-card">
+                <h3>📊 Daily Calorie Tracker</h3>
+                <div className="calorie-tracker-content">
+                  <div className="calorie-summary">
+                    <div className="summary-item">
+                      <span className="summary-label">Planned This Week</span>
+                      <span className="summary-value">{getWeeklyTotals().calories} cal</span>
+                    </div>
+                    <div className="summary-item">
+                      <span className="summary-label">Eaten So Far</span>
+                      <span className="summary-value eaten">{getTotalEatenCaloriesForWeek()} cal</span>
+                    </div>
+                    <div className="summary-item">
+                      <span className="summary-label">Remaining</span>
+                      <span className="summary-value remaining">{Math.max(0, getWeeklyTotals().calories - getTotalEatenCaloriesForWeek())} cal</span>
+                    </div>
+                  </div>
+
+                  <div className="daily-inputs">
+                    <p className="input-title">Log Calories by Day</p>
+                    <div className="days-grid">
+                      {currentWeekData.days.map((day, idx) => (
+                        <div key={idx} className="day-input-group">
+                          <label>{day.day.slice(0, 3)}</label>
+                          <input
+                            type="number"
+                            placeholder="0"
+                            value={getEatenCaloriesForDay(idx)}
+                            onChange={(e) => {
+                              const updated = { ...eatenCalories };
+                              const key = `${selectedPerson}-w${currentWeek}-d${idx}`;
+                              if (e.target.value) {
+                                updated[key] = parseFloat(e.target.value);
+                              } else {
+                                delete updated[key];
+                              }
+                              setEatenCalories(updated);
+                              localStorage.setItem('eaten_calories', JSON.stringify(updated));
+                            }}
+                            min="0"
+                            max="5000"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="dashboard-card">

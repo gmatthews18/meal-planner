@@ -1301,6 +1301,103 @@ body {
   font-weight: 600;
 }
 
+/* Daily Calories Tracker */
+.daily-calories-card {
+  grid-column: 1 / -1;
+}
+
+.calorie-tracker-content {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.calorie-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.summary-item {
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+
+.summary-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.summary-value {
+  display: block;
+  font-size: 1.5rem;
+  color: var(--primary-light);
+  font-weight: 700;
+}
+
+.summary-value.eaten {
+  color: #fbbf24;
+}
+
+.summary-value.remaining {
+  color: var(--success);
+}
+
+.daily-inputs {
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.input-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 10px;
+}
+
+.day-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.day-input-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.day-input-group input {
+  padding: 8px;
+  background: var(--bg-primary);
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.day-input-group input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
 .shared-meals div {
   margin-bottom: 12px;
   padding-bottom: 12px;
